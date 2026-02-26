@@ -51,10 +51,11 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?q=80&w=1920&auto=format&fit=crop"
-                        alt="Alpha Strix Signature Collection"
+                        src="https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?q=80&w=1920&auto=format&fit=crop"
+                        alt="Alpha Strix Black Suit Edition"
                         className="w-full h-full object-cover object-center"
                         loading="eager"
+                        fetchPriority="high"
                     />
                     {/* Lighter overlays to ensure image visibility */}
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)' }}></div>
