@@ -4,32 +4,7 @@ import { ShoppingBag, ArrowRight, Shield, Zap, Star } from 'lucide-react';
 import API from '../utils/api';
 import ProductCard from '../components/ProductCard';
 
-const CATEGORIES = [
-    {
-        title: 'T-Shirts',
-        img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500&auto=format&fit=crop',
-        fallback: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=500&auto=format&fit=crop',
-        link: '/category/t-shirts'
-    },
-    {
-        title: 'Shirts',
-        img: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=500&auto=format&fit=crop',
-        fallback: 'https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=500&auto=format&fit=crop',
-        link: '/category/shirts'
-    },
-    {
-        title: 'Accessories',
-        img: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=500&auto=format&fit=crop',
-        fallback: 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500&auto=format&fit=crop',
-        link: '/category/accessories'
-    },
-    {
-        title: 'Footwear',
-        img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500&auto=format&fit=crop',
-        fallback: 'https://images.unsplash.com/photo-1533867617858-e7b97e060509?q=80&w=500&auto=format&fit=crop',
-        link: '/category/footwear'
-    }
-];
+
 
 const SkeletonCard = () => (
     <div className="animate-pulse bg-steel rounded-xl overflow-hidden border border-gold/10">
@@ -43,6 +18,7 @@ const SkeletonCard = () => (
 );
 
 const Home = () => {
+    const [categories, setCategories] = useState([]);
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const [trendingProducts, setTrendingProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -50,15 +26,13 @@ const Home = () => {
 
     useEffect(() => {
         const controller = new AbortController();
-        const fetchProducts = async () => {
+        const fetchHomeData = async () => {
             try {
                 setError(false);
-                const [featuredRes, trendingRes] = await Promise.all([
-                    API.get('/products?featured=true&limit=8', { signal: controller.signal }),
-                    API.get('/products?trending=true&limit=4', { signal: controller.signal })
-                ]);
-                setFeaturedProducts(featuredRes.data.products || []);
-                setTrendingProducts(trendingRes.data.products || []);
+                const res = await API.get('/public/home', { signal: controller.signal });
+                setCategories(res.data.categories || []);
+                setFeaturedProducts(res.data.featuredProducts || []);
+                setTrendingProducts(res.data.trendingProducts || []);
             } catch (err) {
                 if (err.name !== 'CanceledError' && err.message !== 'canceled') {
                     setError(err.message || 'Unknown error occurred');
@@ -67,7 +41,7 @@ const Home = () => {
                 setLoading(false);
             }
         };
-        fetchProducts();
+        fetchHomeData();
         return () => controller.abort();
     }, []);
 
@@ -122,20 +96,29 @@ const Home = () => {
                     </div>
 
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                        {CATEGORIES.map((cat, i) => (
-                            <Link key={i} to={cat.link} className="group relative h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-colors">
+                        {categories.slice(0, 4).map((cat, i) => (
+                            <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-colors">
                                 <div className="absolute inset-0 bg-steel/30"></div>
                                 <img
-                                    src={cat.img}
-                                    alt={cat.title}
+                                    src={cat.image || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500&auto=format&fit=crop'}
+                                    alt={cat.name}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     loading="lazy"
-                                    onError={(e) => { e.target.onerror = null; e.target.src = cat.fallback; }}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        const fallbacks = [
+                                            'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500',
+                                            'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=500',
+                                            'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500',
+                                            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500'
+                                        ];
+                                        e.target.src = fallbacks[i % fallbacks.length];
+                                    }}
                                 />
                                 <div className="absolute inset-0 bg-navy/50 group-hover:bg-navy/70 transition-colors duration-300"></div>
                                 <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
                                     <div className="flex justify-between items-end">
-                                        <h3 className="text-lg sm:text-2xl font-heading font-bold text-offwhite uppercase tracking-wider">{cat.title}</h3>
+                                        <h3 className="text-lg sm:text-2xl font-heading font-bold text-offwhite uppercase tracking-wider">{cat.name}</h3>
                                         <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gold/20 backdrop-blur flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-navy transition-colors shrink-0">
                                             <ArrowRight size={16} />
                                         </span>
