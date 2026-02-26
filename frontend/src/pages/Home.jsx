@@ -51,15 +51,15 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1554181233-146312a02422?q=80&w=1920&auto=format&fit=crop"
-                        alt="Alpha Strix Luxury Men's Collection"
+                        src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=1920&auto=format&fit=crop"
+                        alt="Alpha Strix Luxury Collection"
                         className="w-full h-full object-cover object-center"
                         loading="eager"
                         fetchPriority="high"
-                        onError={(e) => { e.target.style.display = 'none'; }}
                     />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(10,22,40,1) 0%, rgba(10,22,40,0.95) 35%, rgba(10,22,40,0.6) 65%, rgba(10,22,40,0.1) 100%)' }}></div>
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,22,40,0.8) 0%, transparent 50%)' }}></div>
+                    {/* Gradient Overlays for readability - using black/charcoal for Midnight Noir */}
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.3) 100%)' }}></div>
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)' }}></div>
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
