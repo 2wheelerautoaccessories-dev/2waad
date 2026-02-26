@@ -121,9 +121,9 @@ const Dashboard = () => {
         <div className="min-h-screen bg-navy flex flex-col md:flex-row">
             {/* Sidebar */}
             <aside className="w-full md:w-64 bg-charcoal border-r border-gold/20 flex-col hidden md:flex">
-                <div className="h-20 flex items-center px-6 border-b border-gold/20 gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gold flex items-center justify-center">
-                        <span className="font-heading font-bold text-navy text-base leading-none">A</span>
+                <div className="h-20 flex items-center px-6 border-b border-gold/20 gap-4">
+                    <div className="w-10 h-10 flex items-center justify-center">
+                        <img src="/logo.png" alt="Logo" className="w-full h-full object-contain brightness-110" />
                     </div>
                     <span className="font-heading text-xl font-bold text-gold tracking-widest uppercase">Alpha Strix</span>
                 </div>
@@ -148,11 +148,11 @@ const Dashboard = () => {
             <main className="flex-1 flex flex-col h-screen overflow-hidden">
                 {/* Mobile header */}
                 <div className="md:hidden h-16 bg-charcoal border-b border-gold/20 flex items-center justify-between px-4">
-                    <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-lg bg-gold flex items-center justify-center">
-                            <span className="font-heading font-bold text-navy text-sm">A</span>
+                    <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 flex items-center justify-center">
+                            <img src="/logo.png" alt="Logo" className="w-full h-full object-contain brightness-110" />
                         </div>
-                        <span className="font-heading text-lg font-bold text-gold uppercase tracking-widest">Alpha Strix Admin</span>
+                        <span className="font-heading text-lg font-bold text-gold uppercase tracking-widest">Alpha Strix</span>
                     </div>
                     <button onClick={handleLogout} className="text-red-400"><LogOut size={20} /></button>
                 </div>

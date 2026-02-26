@@ -36,7 +36,7 @@ function App() {
       <Toaster
         position="bottom-right"
         toastOptions={{
-          style: { background: '#1E2D45', color: '#F4F1EB', border: '1px solid #C8973A' },
+          style: { background: '#000000', color: '#F5F5F5', border: '1px solid #C0C0C0' },
         }}
       />
     </BrowserRouter>
