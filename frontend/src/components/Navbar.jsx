@@ -34,7 +34,7 @@ const Navbar = () => {
                                 Alpha Strix
                             </span>
                             <span className="text-[10px] text-slate font-medium tracking-[0.4em] uppercase opacity-70">
-                                Luxury Collection
+                                The Alpha Collection
                             </span>
                         </div>
                     </Link>

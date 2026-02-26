@@ -22,7 +22,7 @@ const Footer = () => {
                                     Alpha Strix
                                 </span>
                                 <span className="text-[8px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
-                                    Luxury Collection
+                                    The Alpha Collection
                                 </span>
                             </div>
                         </Link>

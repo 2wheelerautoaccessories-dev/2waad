@@ -32,7 +32,7 @@ const Login = () => {
                         <img src="/logo.png" alt="Alpha Strix" className="w-full h-full object-contain brightness-110 drop-shadow-[0_0_10px_rgba(192,192,192,0.3)]" />
                     </div>
                     <h1 className="font-heading text-4xl font-extrabold text-gold uppercase tracking-[0.2em]">Alpha Strix</h1>
-                    <p className="text-slate text-xs mt-2 uppercase tracking-[0.4em] opacity-70 font-medium">Luxury Admin Suite</p>
+                    <p className="text-slate text-xs mt-2 uppercase tracking-[0.4em] opacity-70 font-medium">The Alpha Collection</p>
                 </div>
 
                 <div className="bg-steel rounded-2xl p-8 border border-gold/20 shadow-2xl">
