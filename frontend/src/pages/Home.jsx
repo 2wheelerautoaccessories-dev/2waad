@@ -51,15 +51,16 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1520975916090-3105956dac55?q=80&w=1920&auto=format&fit=crop"
-                        alt="Alpha Strix Black Blazer Edition"
-                        className="w-full h-full object-cover object-center"
+                        key="hero-wallpaper"
+                        src="https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?q=80&w=1920&auto=format&fit=crop"
+                        alt="Alpha Strix Luxury Blazer"
+                        className="w-full h-full object-cover object-center opacity-100"
                         loading="eager"
-                        fetchPriority="high"
+                        style={{ display: 'block' }}
                     />
-                    {/* Balanced Overlay for readability and visibility */}
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)' }}></div>
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%)' }}></div>
+                    {/* Lighter overlays to ensure image visibility */}
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)' }}></div>
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%)' }}></div>
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
