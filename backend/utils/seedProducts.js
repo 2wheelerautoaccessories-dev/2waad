@@ -8,10 +8,34 @@ module.exports = async function seedProducts() {
 
         // Create categories for men's fashion
         const cats = [
-            { name: 'T-Shirts', slug: 't-shirts', description: 'Stylish men\'s t-shirts and casual tops', order: 1 },
-            { name: 'Shirts', slug: 'shirts', description: 'Formal and casual shirts for men', order: 2 },
-            { name: 'Accessories', slug: 'accessories', description: 'Men\'s fashion accessories and essentials', order: 3 },
-            { name: 'Footwear', slug: 'footwear', description: 'Stylish men\'s footwear and sneakers', order: 4 },
+            {
+                name: 'T-Shirts',
+                slug: 't-shirts',
+                description: 'Stylish men\'s t-shirts and casual tops',
+                image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500',
+                order: 1
+            },
+            {
+                name: 'Shirts',
+                slug: 'shirts',
+                description: 'Formal and casual shirts for men',
+                image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=500',
+                order: 2
+            },
+            {
+                name: 'Accessories',
+                slug: 'accessories',
+                description: 'Men\'s fashion accessories and essentials',
+                image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500',
+                order: 3
+            },
+            {
+                name: 'Footwear',
+                slug: 'footwear',
+                description: 'Stylish men\'s footwear and sneakers',
+                image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500',
+                order: 4
+            },
         ];
 
         const createdCats = {};

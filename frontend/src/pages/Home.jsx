@@ -99,22 +99,22 @@ const Home = () => {
                         {categories.slice(0, 4).map((cat, i) => (
                             <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-colors">
                                 <div className="absolute inset-0 bg-steel/30"></div>
-                                <img
-                                    src={cat.image || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500&auto=format&fit=crop'}
-                                    alt={cat.name}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    loading="lazy"
-                                    onError={(e) => {
-                                        e.target.onerror = null;
-                                        const fallbacks = [
-                                            'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500',
-                                            'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=500',
-                                            'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500',
-                                            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500'
-                                        ];
-                                        e.target.src = fallbacks[i % fallbacks.length];
-                                    }}
-                                />
+                                {(() => {
+                                    const catImages = {
+                                        'T-Shirts': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500',
+                                        'Shirts': 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=500',
+                                        'Accessories': 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500',
+                                        'Footwear': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500'
+                                    };
+                                    return (
+                                        <img
+                                            src={cat.image || catImages[cat.name] || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500'}
+                                            alt={cat.name}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            loading="lazy"
+                                        />
+                                    );
+                                })()}
                                 <div className="absolute inset-0 bg-navy/50 group-hover:bg-navy/70 transition-colors duration-300"></div>
                                 <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
                                     <div className="flex justify-between items-end">

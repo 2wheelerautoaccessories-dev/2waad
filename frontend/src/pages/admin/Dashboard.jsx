@@ -22,11 +22,6 @@ const Dashboard = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [imagePreview, setImagePreview] = useState('');
 
-    // Category Modal
-    const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
-    const [editingCategory, setEditingCategory] = useState(null);
-    const [categoryFormData, setCategoryFormData] = useState({ name: '', description: '', order: 0 });
-
     const token = localStorage.getItem('adminToken');
 
     useEffect(() => {
@@ -61,12 +56,6 @@ const Dashboard = () => {
         catch (err) { toast.error('Failed to delete'); }
     };
 
-    const handleDeleteCategory = async (id) => {
-        if (!window.confirm('Delete this category?')) return;
-        try { await API.delete(`/categories/${id}`); toast.success('Category deleted'); fetchData(); }
-        catch (err) { toast.error('Failed to delete'); }
-    };
-
     const openModal = (product = null) => {
         if (product) {
             setEditingProduct(product);
@@ -88,12 +77,6 @@ const Dashboard = () => {
         }
         setSelectedImage(null);
         setIsModalOpen(true);
-    };
-
-    const openCategoryModal = (cat = null) => {
-        if (cat) { setEditingCategory(cat); setCategoryFormData({ name: cat.name, description: cat.description, order: cat.order || 0 }); }
-        else { setEditingCategory(null); setCategoryFormData({ name: '', description: '', order: 0 }); }
-        setIsCategoryModalOpen(true);
     };
 
     const handleImageChange = (e) => {
@@ -126,15 +109,6 @@ const Dashboard = () => {
         } catch (err) { toast.error(err.response?.data?.message || 'Operation failed'); }
     };
 
-    const handleCategorySubmit = async (e) => {
-        e.preventDefault();
-        try {
-            if (editingCategory) { await API.put(`/categories/${editingCategory._id}`, categoryFormData); toast.success('Category updated'); }
-            else { await API.post('/categories', categoryFormData); toast.success('Category added'); }
-            setIsCategoryModalOpen(false); fetchData();
-        } catch (err) { toast.error(err.response?.data?.message || 'Operation failed'); }
-    };
-
     const inputCls = "w-full bg-navy border border-gold/20 rounded-xl px-4 py-2.5 text-offwhite placeholder-slate outline-none focus:border-gold focus:ring-1 focus:ring-gold text-sm";
 
     if (loading) return (
@@ -161,12 +135,6 @@ const Dashboard = () => {
                     >
                         <Package size={20} /> Products
                     </button>
-                    <button
-                        onClick={() => setActiveTab('categories')}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors font-heading uppercase tracking-wider text-sm ${activeTab === 'categories' ? 'bg-gold/10 text-gold border border-gold/30' : 'text-slate hover:bg-steel/50 hover:text-offwhite'}`}
-                    >
-                        <Grid size={20} /> Categories
-                    </button>
                 </nav>
 
                 <div className="p-4 border-t border-gold/20">
@@ -192,7 +160,6 @@ const Dashboard = () => {
                 {/* Mobile tabs */}
                 <div className="md:hidden flex border-b border-gold/20 bg-charcoal">
                     <button onClick={() => setActiveTab('products')} className={`flex-1 py-3 text-sm font-heading uppercase tracking-wider ${activeTab === 'products' ? 'text-gold border-b-2 border-gold' : 'text-slate'}`}>Products</button>
-                    <button onClick={() => setActiveTab('categories')} className={`flex-1 py-3 text-sm font-heading uppercase tracking-wider ${activeTab === 'categories' ? 'text-gold border-b-2 border-gold' : 'text-slate'}`}>Categories</button>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 md:p-8 bg-navy">
@@ -286,53 +253,7 @@ const Dashboard = () => {
                         </>
                     )}
 
-                    {/* ── CATEGORIES TAB ── */}
-                    {activeTab === 'categories' && (
-                        <>
-                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                                <h1 className="text-2xl font-bold text-offwhite font-heading uppercase tracking-wider">Categories</h1>
-                                <button onClick={() => openCategoryModal()} className="btn-primary py-2.5 px-5 text-sm">
-                                    <Plus size={18} /> Add Category
-                                </button>
-                            </div>
-
-                            <div className="bg-steel rounded-xl border border-gold/10 overflow-hidden">
-                                <div className="overflow-x-auto">
-                                    <table className="w-full text-left border-collapse">
-                                        <thead>
-                                            <tr className="bg-charcoal border-b border-gold/20 text-slate text-xs uppercase tracking-widest">
-                                                <th className="px-6 py-4 font-medium">Name</th>
-                                                <th className="px-6 py-4 font-medium">Slug</th>
-                                                <th className="px-6 py-4 font-medium">Description</th>
-                                                <th className="px-6 py-4 font-medium">Order</th>
-                                                <th className="px-6 py-4 font-medium">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-gold/10">
-                                            {categories.map(cat => (
-                                                <tr key={cat._id} className="hover:bg-navy/50 transition-colors">
-                                                    <td className="px-6 py-4 font-medium text-offwhite text-sm">{cat.name}</td>
-                                                    <td className="px-6 py-4 text-slate text-xs font-mono">{cat.slug}</td>
-                                                    <td className="px-6 py-4 text-slate text-sm max-w-xs truncate">{cat.description}</td>
-                                                    <td className="px-6 py-4 text-gold font-heading">{cat.order}</td>
-                                                    <td className="px-6 py-4">
-                                                        <div className="flex items-center gap-3">
-                                                            <button onClick={() => openCategoryModal(cat)} className="text-slate hover:text-gold transition-colors">
-                                                                <Edit2 size={18} />
-                                                            </button>
-                                                            <button onClick={() => handleDeleteCategory(cat._id)} className="text-slate hover:text-red-400 transition-colors">
-                                                                <Trash2 size={18} />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </>
-                    )}
+                    {/* Main content area */}
                 </div>
             </main>
 
@@ -443,40 +364,6 @@ const Dashboard = () => {
                 </div>
             )}
 
-            {/* ── ADD/EDIT CATEGORY MODAL ── */}
-            {isCategoryModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/80 backdrop-blur-sm">
-                    <div className="bg-steel rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl border border-gold/20 animate-slide-up">
-                        <div className="sticky top-0 bg-steel/95 backdrop-blur-md px-8 py-5 border-b border-gold/20 flex justify-between items-center z-10">
-                            <h2 className="text-xl font-heading font-bold text-offwhite uppercase tracking-wider">
-                                {editingCategory ? 'Edit Category' : 'Add New Category'}
-                            </h2>
-                            <button onClick={() => setIsCategoryModalOpen(false)} className="text-slate hover:text-offwhite bg-navy/50 p-2 rounded-full transition-colors">
-                                <X size={20} />
-                            </button>
-                        </div>
-
-                        <form onSubmit={handleCategorySubmit} className="p-8 space-y-6">
-                            <div>
-                                <label className="block text-sm font-medium text-slate mb-2">Category Name</label>
-                                <input type="text" required value={categoryFormData.name} onChange={e => setCategoryFormData({ ...categoryFormData, name: e.target.value })} className={inputCls} />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate mb-2">Description</label>
-                                <textarea required rows="3" value={categoryFormData.description} onChange={e => setCategoryFormData({ ...categoryFormData, description: e.target.value })} className={`${inputCls} resize-none`}></textarea>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate mb-2">Display Order</label>
-                                <input type="number" required value={categoryFormData.order} onChange={e => setCategoryFormData({ ...categoryFormData, order: e.target.value })} className={inputCls} />
-                            </div>
-                            <div className="pt-4 border-t border-gold/20 flex justify-end gap-4">
-                                <button type="button" onClick={() => setIsCategoryModalOpen(false)} className="px-6 py-2.5 rounded-xl border border-gold/20 text-slate font-medium hover:bg-navy transition-colors">Cancel</button>
-                                <button type="submit" className="btn-primary py-2.5">{editingCategory ? 'Save Changes' : 'Add Category'}</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
