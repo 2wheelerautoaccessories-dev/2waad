@@ -51,8 +51,8 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?q=80&w=1920&auto=format&fit=crop"
-                        alt="Alpha Strix Men's Essentials"
+                        src="https://images.unsplash.com/photo-1594932224491-9944ef16dca2?q=80&w=1920&auto=format&fit=crop"
+                        alt="Alpha Strix Black Edition"
                         className="w-full h-full object-cover object-center"
                         loading="eager"
                         fetchPriority="high"
