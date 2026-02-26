@@ -101,8 +101,8 @@ const Home = () => {
                                 <div className="absolute inset-0 bg-steel/30"></div>
                                 {(() => {
                                     const catImages = {
-                                        'T-Shirts': 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500',
-                                        'Shirts': 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=500',
+                                        'T-Shirts': 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=800',
+                                        'Shirts': 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800',
                                         'Accessories': 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500',
                                         'Footwear': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500'
                                     };
