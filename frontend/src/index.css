@@ -3,21 +3,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Midnight Noir Colour Palette (Luxury) ── */
-  --color-navy: #000000;
-  /* Pure Black */
-  --color-steel: #111111;
-  /* Deep Charcoal */
-  --color-gold: #C0C0C0;
-  /* Metallic Silver (Platinum) */
-  --color-gold-lt: #FFFFFF;
-  /* Pure White */
+  /* ── Premium White Colour Palette (Clean & Minimalist) ── */
+  --color-navy: #FFFFFF;
+  /* Pure White Background */
+  --color-steel: #F8F8F8;
+  /* Light Grey for cards */
+  --color-gold: #000000;
+  /* Sharp Black for accents/buttons */
+  --color-gold-lt: #333333;
+  /* Charcoal for hover states */
   --color-slate: #666666;
-  /* Medium Grey */
-  --color-offwhite: #F5F5F5;
-  /* Soft White */
-  --color-charcoal: #080808;
-  /* Near Black */
+  /* Medium Grey for text */
+  --color-offwhite: #111111;
+  /* Near Black for main text */
+  --color-charcoal: #F3F3F3;
+  /* Very Light Grey for alt sections */
 
   --font-heading: 'Rajdhani', sans-serif;
   --font-body: 'Inter', sans-serif;
