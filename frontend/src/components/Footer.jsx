@@ -9,11 +9,22 @@ const Footer = () => {
 
                     {/* Brand */}
                     <div className="space-y-4">
-                        <Link to="/" className="flex items-center gap-3 mb-2">
-                            <div className="w-10 h-10 rounded-lg bg-gold flex items-center justify-center">
-                                <span className="font-heading font-bold text-navy text-lg leading-none">A</span>
+                        <Link to="/" className="flex items-center gap-4 mb-2 group">
+                            <div className="w-12 h-12 flex items-center justify-center">
+                                <img
+                                    src="/logo.png"
+                                    alt="Alpha Strix"
+                                    className="w-full h-full object-contain brightness-110 drop-shadow-[0_0_5px_rgba(192,192,192,0.2)]"
+                                />
                             </div>
-                            <span className="font-heading text-xl font-bold text-gold tracking-widest uppercase">Alpha Strix</span>
+                            <div className="flex flex-col -space-y-1">
+                                <span className="font-heading text-xl font-extrabold text-gold tracking-widest uppercase">
+                                    Alpha Strix
+                                </span>
+                                <span className="text-[8px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
+                                    Luxury Collection
+                                </span>
+                            </div>
                         </Link>
                         <p className="text-slate text-sm leading-relaxed">
                             Discover our curated collection of premium men's fashion, accessories, and footwear designed for the bold and modern man.

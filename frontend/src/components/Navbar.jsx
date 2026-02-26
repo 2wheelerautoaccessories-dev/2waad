@@ -20,14 +20,23 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
 
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center flex-shrink-0 gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-gold flex items-center justify-center">
-                            <span className="font-heading font-bold text-navy text-lg leading-none">A</span>
+                    {/* Logo & Brand */}
+                    <Link to="/" className="flex items-center flex-shrink-0 gap-4 group">
+                        <div className="relative w-12 h-12 flex items-center justify-center">
+                            <img
+                                src="/logo.png"
+                                alt="Alpha Strix Logo"
+                                className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_0_8px_rgba(192,192,192,0.3)] group-hover:drop-shadow-[0_0_12px_rgba(192,192,192,0.5)] transition-all duration-300"
+                            />
                         </div>
-                        <span className="font-heading text-2xl font-bold text-gold tracking-widest uppercase">
-                            Alpha Strix
-                        </span>
+                        <div className="flex flex-col -space-y-1">
+                            <span className="font-heading text-2xl font-extrabold text-gold tracking-widest uppercase transition-all duration-300 group-hover:text-offwhite group-hover:tracking-[0.15em]">
+                                Alpha Strix
+                            </span>
+                            <span className="text-[10px] text-slate font-medium tracking-[0.4em] uppercase opacity-70">
+                                Luxury Collection
+                            </span>
+                        </div>
                     </Link>
 
                     {/* Desktop Nav */}
