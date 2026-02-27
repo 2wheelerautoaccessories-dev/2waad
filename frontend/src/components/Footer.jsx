@@ -34,11 +34,11 @@ const Footer = () => {
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Instagram size={18} />
                             </a>
-                            <a href="https://www.facebook.com/alphastrix" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.facebook.com/profile.php?id=61588591273834" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Facebook size={18} />
                             </a>
-                            <a href="https://www.youtube.com/@alphastrix" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.youtube.com/channel/UCJFRUzFvOXrpZGIbwVpmYAg" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Youtube size={18} />
                             </a>
@@ -72,7 +72,7 @@ const Footer = () => {
                         <ul className="space-y-3">
                             <li className="flex items-start gap-3 text-sm text-slate">
                                 <MapPin size={18} className="text-gold shrink-0 mt-0.5" />
-                                <span>Wadala Junction, Pratiksha Nagar,<br />Mumbai, Maharashtra 400022</span>
+                                <span>Tarnaka, Hyderabad,<br />Telangana, 500007</span>
                             </li>
                             <li className="flex items-center gap-3 text-sm text-slate">
                                 <Mail size={18} className="text-gold shrink-0" />

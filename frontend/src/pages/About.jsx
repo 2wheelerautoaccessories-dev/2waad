@@ -129,8 +129,8 @@ const About = () => {
                                 <div>
                                     <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Our Location</h3>
                                     <p className="text-slate leading-relaxed">
-                                        Wadala Junction, Pratiksha Nagar,<br />
-                                        Mumbai, Maharashtra 400022
+                                        Tarnaka, Hyderabad,<br />
+                                        Telangana, 500007
                                     </p>
                                 </div>
                             </div>
