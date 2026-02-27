@@ -51,7 +51,7 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1920&auto=format&fit=crop"
+                        src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?q=80&w=1920&auto=format&fit=crop"
                         alt="Alpha Strix Signature Collection"
                         className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
                         loading="eager"
@@ -64,7 +64,7 @@ const Home = () => {
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div className="max-w-2xl animate-slide-up">
                         <span className="block text-gold font-heading font-semibold tracking-[0.4em] uppercase mb-4 text-sm">
-                            New Collection 2024
+                            New Collection
                         </span>
                         <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold font-heading mb-6 leading-none text-offwhite">
                             DRESS <br />
@@ -94,13 +94,13 @@ const Home = () => {
                         <div className="w-16 h-1 bg-gold mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                         {categories.slice(0, 4).map((cat, i) => (
-                            <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-80 sm:h-96 rounded-2xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-all duration-500 shadow-2xl">
+                            <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-64 sm:h-96 rounded-2xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-all duration-500 shadow-2xl">
                                 {(() => {
                                     const catImages = {
                                         'T-Shirts': 'https://images.unsplash.com/photo-1562157873-818bc0726f68?q=80&w=1000',
-                                        'Shirts': 'https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?q=80&w=1000',
+                                        'Shirts': 'https://images.unsplash.com/photo-1620012253295-c05c609df143?q=80&w=1000',
                                         'Accessories': 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000',
                                         'Footwear': 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000'
                                     };
@@ -116,14 +116,14 @@ const Home = () => {
                                 {/* Subtle gradient for text readability without blurring the image */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
 
-                                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
                                     <div className="flex justify-between items-end transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                                         <div>
-                                            <p className="text-gold text-xs font-bold tracking-widest uppercase mb-1">Explore</p>
-                                            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-offwhite uppercase tracking-tighter leading-none">{cat.name}</h3>
+                                            <p className="text-gold text-[10px] font-bold tracking-widest uppercase mb-1">Explore</p>
+                                            <h3 className="text-lg sm:text-3xl font-heading font-extrabold text-offwhite uppercase tracking-tighter leading-none">{cat.name}</h3>
                                         </div>
-                                        <span className="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-navy transform -rotate-45 group-hover:rotate-0 transition-all duration-500 shadow-xl">
-                                            <ArrowRight size={20} />
+                                        <span className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-gold flex items-center justify-center text-navy transform -rotate-45 group-hover:rotate-0 transition-all duration-500 shadow-xl">
+                                            <ArrowRight size={16} className="sm:w-5 sm:h-5" />
                                         </span>
                                     </div>
                                 </div>
