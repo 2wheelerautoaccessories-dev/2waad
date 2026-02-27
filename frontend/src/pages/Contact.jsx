@@ -1,22 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Mail, MapPin, Send, Phone } from 'lucide-react';
-import API from '../utils/api';
+import { useSettings } from '../context/SettingsContext';
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [loading, setLoading] = useState(false);
-    const [settings, setSettings] = useState({
-        whatsappNumber: '+919876543210',
-        email: 'contact@alphastrix.in',
-        address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
-    });
-
-    useEffect(() => {
-        API.get('/settings').then(res => {
-            if (res.data) setSettings(res.data);
-        }).catch(() => { });
-    }, []);
+    const settings = useSettings();
 
     const handleSubmit = (e) => {
         e.preventDefault();

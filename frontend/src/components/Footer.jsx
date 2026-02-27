@@ -1,20 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Youtube, Mail, MapPin, Phone } from 'lucide-react';
-import API from '../utils/api';
+import { useSettings } from '../context/SettingsContext';
 
 const Footer = () => {
-    const [settings, setSettings] = useState({
-        whatsappNumber: '+919876543210',
-        email: 'contact@alphastrix.in',
-        address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
-    });
+    const settings = useSettings();
 
-    useEffect(() => {
-        API.get('/settings').then(res => {
-            if (res.data) setSettings(res.data);
-        }).catch(() => { });
-    }, []);
 
     return (
         <footer className="bg-charcoal pt-16 pb-8 border-t border-gold/20 mt-auto">
