@@ -13,6 +13,10 @@ const settingsSchema = new mongoose.Schema({
         type: String,
         default: 'Tarnaka, Hyderabad,\nTelangana, 500007'
     },
+    hasSeeded: {
+        type: Boolean,
+        default: false
+    },
     updatedAt: {
         type: Date,
         default: Date.now

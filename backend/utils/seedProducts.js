@@ -1,10 +1,15 @@
 const Category = require('../models/Category');
 const Product = require('../models/Product');
+const Settings = require('../models/Settings');
 
 module.exports = async function seedProducts() {
     try {
-        const count = await Product.countDocuments();
-        if (count > 0) return;
+        // Check if we have already seeded once (via a flag in Settings)
+        // This prevents products from reappearing if the user intentionally deletes them
+        let settings = await Settings.findOne();
+        if (!settings) {
+            settings = await Settings.create({});
+        }
 
         // Create categories for men's fashion
         const cats = [
@@ -23,18 +28,74 @@ module.exports = async function seedProducts() {
                 order: 2
             },
             {
+                name: 'Suits',
+                slug: 'suits',
+                description: 'Premium men\'s suits for formal excellence',
+                image: 'https://images.unsplash.com/photo-1594932224528-9460c5de307c?q=80&w=500',
+                order: 3
+            },
+            {
+                name: 'Blazers',
+                slug: 'blazers',
+                description: 'Elegant blazers for a sharp, sophisticated look',
+                image: 'https://images.unsplash.com/photo-1555069519-127aadedf1ee?q=80&w=500',
+                order: 4
+            },
+            {
+                name: 'Trousers',
+                slug: 'trousers',
+                description: 'Classic and modern trousers for men',
+                image: 'https://images.unsplash.com/photo-1624371414361-e6e0efc5831f?q=80&w=500',
+                order: 5
+            },
+            {
+                name: 'Jeans',
+                slug: 'jeans',
+                description: 'Durable and stylish denim for every occasion',
+                image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500',
+                order: 6
+            },
+            {
+                name: 'Shorts',
+                slug: 'shorts',
+                description: 'Casual and comfortable shorts for men',
+                image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=500',
+                order: 7
+            },
+            {
+                name: 'Hoodies',
+                slug: 'hoodies',
+                description: 'Premium hoodies and sweatshirts for warmth and style',
+                image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500',
+                order: 8
+            },
+            {
+                name: 'Gym Wear',
+                slug: 'gym-wear',
+                description: 'High-performance activewear for your workouts',
+                image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=500',
+                order: 9
+            },
+            {
+                name: 'Innerwear',
+                slug: 'innerwear',
+                description: 'Comfortable and premium men\'s innerwear',
+                image: 'https://images.unsplash.com/photo-1590483736622-39da8af75bba?q=80&w=500',
+                order: 10
+            },
+            {
                 name: 'Accessories',
                 slug: 'accessories',
                 description: 'Men\'s fashion accessories and essentials',
                 image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500',
-                order: 3
+                order: 11
             },
             {
                 name: 'Footwear',
                 slug: 'footwear',
                 description: 'Stylish men\'s footwear and sneakers',
                 image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500',
-                order: 4
+                order: 12
             },
         ];
 
@@ -42,6 +103,10 @@ module.exports = async function seedProducts() {
         for (const cat of cats) {
             const existing = await Category.findOne({ slug: cat.slug });
             createdCats[cat.slug] = existing || await Category.create(cat);
+        }
+
+        if (settings.hasSeeded) {
+            return;
         }
 
         // Sample products for men's wear
@@ -176,6 +241,10 @@ module.exports = async function seedProducts() {
         ];
 
         await Product.insertMany(products);
+
+        // Mark as seeded so they don't reappear if deleted
+        await Settings.findByIdAndUpdate(settings._id, { hasSeeded: true });
+
         console.log(`✅ ${products.length} Alpha Strix sample products seeded`);
     } catch (err) {
         console.error('Products seed error:', err);

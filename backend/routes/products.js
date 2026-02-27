@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const Product = require('../models/Product');
 const auth = require('../middleware/auth');
-const { deleteImages } = require('../utils/cloudinary');
+const { deleteImages, uploadToCloudinary } = require('../utils/cloudinary');
 
 // Local storage setup as fallback (used only if Cloudinary is not configured)
 const storage = multer.diskStorage({
@@ -75,9 +75,27 @@ router.get('/:id', async (req, res) => {
 router.post('/', auth, upload.array('images', 5), async (req, res) => {
     try {
         const { name, description, price, originalPrice, categoryId, categoryName, meeshoLink, tags, isFeatured, isTrending, badge, rating, order } = req.body;
-        let images = (req.files && req.files.length > 0) ? req.files.map(f => `/uploads/${f.filename}`) : [];
-        if (images.length === 0 && req.body.images) {
-            images = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+
+        // Handle images
+        let images = [];
+
+        // 1. Process files uploaded directly to backend
+        if (req.files && req.files.length > 0) {
+            for (const file of req.files) {
+                const cloudinaryUrl = await uploadToCloudinary(file.path);
+                if (cloudinaryUrl) {
+                    images.push(cloudinaryUrl);
+                    // Cleanup local file
+                    fs.unlink(file.path, (err) => { if (err) console.error('Local file cleanup error:', err); });
+                }
+            }
+        }
+
+        // 2. Process URLs sent from frontend (already on Cloudinary)
+        if (req.body.images) {
+            const bodyImages = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+            const remoteImages = bodyImages.filter(img => typeof img === 'string' && img.startsWith('http'));
+            images = [...images, ...remoteImages];
         }
 
         const product = new Product({
@@ -122,27 +140,41 @@ router.put('/:id', auth, upload.array('images', 5), async (req, res) => {
         if (rating !== undefined) updateData.rating = Number(rating);
         if (order !== undefined) updateData.order = Number(order);
 
-        // Determine if new images are incoming
-        let newImages = null;
+        // Process images
+        let finalImages = null;
+
+        // 1. Process files uploaded to backend
         if (req.files && req.files.length > 0) {
-            newImages = req.files.map(f => `/uploads/${f.filename}`);
-        } else if (req.body.images) {
-            newImages = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+            finalImages = [];
+            for (const file of req.files) {
+                const cloudinaryUrl = await uploadToCloudinary(file.path);
+                if (cloudinaryUrl) {
+                    finalImages.push(cloudinaryUrl);
+                    fs.unlink(file.path, (err) => { if (err) console.error('Cleanup error:', err); });
+                }
+            }
         }
 
-        if (newImages) {
+        // 2. Process existing or frontend-uploaded URLs
+        if (req.body.images) {
+            const bodyImages = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+            const remoteImages = bodyImages.filter(img => typeof img === 'string' && img.startsWith('http'));
+            finalImages = finalImages ? [...finalImages, ...remoteImages] : remoteImages;
+        }
+
+        if (finalImages) {
             // ✅ SMART CLEANUP: fetch old product and delete old Cloudinary images
             const oldProduct = await Product.findById(req.params.id);
             if (oldProduct && oldProduct.images && oldProduct.images.length > 0) {
                 const oldUrls = oldProduct.images.filter(img => img && img.includes('res.cloudinary.com'));
-                const newUrls = newImages.filter(img => img && img.includes('res.cloudinary.com'));
+                const newUrls = finalImages.filter(img => img && img.includes('res.cloudinary.com'));
                 // Only delete images that are not being kept
                 const toDelete = oldUrls.filter(url => !newUrls.includes(url));
                 if (toDelete.length > 0) {
                     deleteImages(toDelete).catch(err => console.warn('Cloudinary cleanup error:', err));
                 }
             }
-            updateData.images = newImages;
+            updateData.images = finalImages;
         }
 
         const product = await Product.findByIdAndUpdate(req.params.id, updateData, { new: true });

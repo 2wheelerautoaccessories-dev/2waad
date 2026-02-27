@@ -49,4 +49,25 @@ const deleteImages = async (urls) => {
     }
 };
 
-module.exports = { cloudinary, deleteImages };
+/**
+ * Uploads a local file to Cloudinary.
+ * @param {string} localPath - Path to the local file
+ * @returns {Promise<string|null>} - Optimized Cloudinary URL or null on failure
+ */
+const uploadToCloudinary = async (localPath) => {
+    if (!localPath) return null;
+    try {
+        const result = await cloudinary.uploader.upload(localPath, {
+            folder: 'alphastrix',
+            resource_type: 'auto'
+        });
+
+        // Return URL with optimization transforms
+        return result.secure_url.replace('/upload/', '/upload/f_auto,q_auto/');
+    } catch (err) {
+        console.error('Cloudinary backend upload error:', err);
+        return null;
+    }
+};
+
+module.exports = { cloudinary, deleteImages, uploadToCloudinary };
