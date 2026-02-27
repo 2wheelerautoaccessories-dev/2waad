@@ -106,7 +106,7 @@ const Home = () => {
                                     };
                                     return (
                                         <img
-                                            src={getImageUrl(cat.image) || catImages[cat.name] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1000'}
+                                            src={catImages[cat.name] || getImageUrl(cat.image) || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1000'}
                                             alt={cat.name}
                                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                                             loading="lazy"
