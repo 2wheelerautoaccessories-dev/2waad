@@ -101,8 +101,8 @@ const Home = () => {
                                     const catImages = {
                                         'T-Shirts': 'https://images.unsplash.com/photo-1562157873-818bc0726f68?q=80&w=1000',
                                         'Shirts': 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1000',
-                                        'Suits': 'https://images.unsplash.com/photo-1593032465175-481ac7f401a0?q=80&w=1000',
-                                        'Blazers': 'https://images.unsplash.com/photo-1555069519-127aadedf1ee?q=80&w=1000'
+                                        'Accessories': 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000',
+                                        'Footwear': 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000'
                                     };
                                     return (
                                         <img
