@@ -23,5 +23,7 @@ const ProductSchema = new mongoose.Schema({
 ProductSchema.index({ categoryName: 1 });
 ProductSchema.index({ isFeatured: 1 });
 ProductSchema.index({ isTrending: 1 });
+ProductSchema.index({ order: 1 });
+ProductSchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model('Product', ProductSchema);

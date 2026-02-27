@@ -74,7 +74,10 @@ router.get('/:id', async (req, res) => {
 router.post('/', auth, upload.array('images', 5), async (req, res) => {
     try {
         const { name, description, price, originalPrice, categoryId, categoryName, meeshoLink, tags, isFeatured, isTrending, badge, rating, order } = req.body;
-        const images = req.files ? req.files.map(f => `/uploads/${f.filename}`) : (req.body.images ? JSON.parse(req.body.images) : []);
+        let images = (req.files && req.files.length > 0) ? req.files.map(f => `/uploads/${f.filename}`) : [];
+        if (images.length === 0 && req.body.images) {
+            images = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+        }
 
         const product = new Product({
             name, description,
@@ -116,8 +119,11 @@ router.put('/:id', auth, upload.array('images', 5), async (req, res) => {
         if (inStock !== undefined) updateData.inStock = inStock === 'true' || inStock === true;
         if (rating !== undefined) updateData.rating = Number(rating);
         if (order !== undefined) updateData.order = Number(order);
-        if (req.files && req.files.length > 0) updateData.images = req.files.map(f => `/uploads/${f.filename}`);
-        else if (req.body.images) updateData.images = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+        if (req.files && req.files.length > 0) {
+            updateData.images = req.files.map(f => `/uploads/${f.filename}`);
+        } else if (req.body.images) {
+            updateData.images = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+        }
 
         const product = await Product.findByIdAndUpdate(req.params.id, updateData, { new: true });
         if (!product) return res.status(404).json({ message: 'Product not found' });

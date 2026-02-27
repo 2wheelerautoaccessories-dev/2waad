@@ -7,9 +7,9 @@ const Category = require('../models/Category');
 router.get('/home', async (req, res) => {
     try {
         const [categories, featuredProducts, trendingProducts] = await Promise.all([
-            Category.find().sort({ order: 1 }),
-            Product.find({ isFeatured: true }).limit(8).sort({ createdAt: -1 }),
-            Product.find({ isTrending: true }).limit(4).sort({ createdAt: -1 })
+            Category.find().sort({ order: 1 }).lean(),
+            Product.find({ isFeatured: true }).limit(8).sort({ createdAt: -1 }).lean(),
+            Product.find({ isTrending: true }).limit(4).sort({ createdAt: -1 }).lean()
         ]);
 
         res.json({

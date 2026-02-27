@@ -90,14 +90,95 @@ const Dashboard = () => {
         }
     };
 
+    const compressImage = (file) => {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1200;
+                    const MAX_HEIGHT = 1500;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                    } else {
+                        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    canvas.toBlob((blob) => {
+                        resolve(new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() }));
+                    }, 'image/jpeg', 0.85); // 85% quality
+                };
+            };
+        });
+    };
+
+    const uploadToCloudinary = async (file) => {
+        const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+        const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+        if (!cloudName || !uploadPreset) {
+            console.warn('Cloudinary credentials missing, falling back to local upload');
+            return null;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
+
+        try {
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+            if (data.secure_url) return data.secure_url;
+            throw new Error(data.error?.message || 'Upload failed');
+        } catch (err) {
+            console.error('Cloudinary Error:', err);
+            toast.error('Cloudinary upload failed: ' + err.message);
+            return null;
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const submitData = new FormData();
+
+        // Add basic fields
         Object.keys(formData).forEach(key => submitData.append(key, formData[key]));
+
         const cat = categories.find(c => c._id === formData.categoryId);
         if (cat) submitData.append('categoryName', cat.name);
-        if (selectedImage) submitData.append('images', selectedImage);
+
         try {
+            if (selectedImage) {
+                toast.loading('Uploading image...', { id: 'upload' });
+                const compressed = await compressImage(selectedImage);
+                const cloudinaryUrl = await uploadToCloudinary(compressed);
+
+                if (cloudinaryUrl) {
+                    // Send as JSON string for images array
+                    submitData.append('images', JSON.stringify([cloudinaryUrl]));
+                } else {
+                    // Fallback to local upload
+                    submitData.append('images', selectedImage);
+                }
+                toast.dismiss('upload');
+            } else if (editingProduct) {
+                // Keep existing images if no new one selected
+                submitData.append('images', JSON.stringify(editingProduct.images || []));
+            }
+
             if (editingProduct) {
                 await API.put(`/products/${editingProduct._id}`, submitData, { headers: { 'Content-Type': 'multipart/form-data' } });
                 toast.success('Product updated');
@@ -106,7 +187,10 @@ const Dashboard = () => {
                 toast.success('Product added');
             }
             setIsModalOpen(false); fetchData();
-        } catch (err) { toast.error(err.response?.data?.message || 'Operation failed'); }
+        } catch (err) {
+            toast.dismiss('upload');
+            toast.error(err.response?.data?.message || 'Operation failed');
+        }
     };
 
     const inputCls = "w-full bg-navy border border-gold/20 rounded-xl px-4 py-2.5 text-offwhite placeholder-slate outline-none focus:border-gold focus:ring-1 focus:ring-gold text-sm";

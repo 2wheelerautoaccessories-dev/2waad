@@ -8,4 +8,6 @@ const CategorySchema = new mongoose.Schema({
     order: { type: Number, default: 0 }
 }, { timestamps: true });
 
+CategorySchema.index({ order: 1 });
+
 module.exports = mongoose.model('Category', CategorySchema);

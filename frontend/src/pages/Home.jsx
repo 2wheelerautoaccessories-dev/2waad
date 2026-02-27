@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Shield, Zap, Star } from 'lucide-react';
-import API from '../utils/api';
+import API, { getImageUrl } from '../utils/api';
 import ProductCard from '../components/ProductCard';
 
 
@@ -107,7 +107,7 @@ const Home = () => {
                                     };
                                     return (
                                         <img
-                                            src={cat.image || catImages[cat.name] || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500'}
+                                            src={getImageUrl(cat.image) || catImages[cat.name] || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500'}
                                             alt={cat.name}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                             loading="lazy"

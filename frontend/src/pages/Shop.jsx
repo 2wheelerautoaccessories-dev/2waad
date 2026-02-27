@@ -14,6 +14,7 @@ const Shop = () => {
     const search = searchParams.get('search') || '';
     const category = searchParams.get('category') || '';
     const sort = searchParams.get('sort') || '';
+    const limit = searchParams.get('limit') || '20';
     const [searchInput, setSearchInput] = useState(search);
 
     useEffect(() => {
@@ -24,7 +25,7 @@ const Shop = () => {
                 if (search) params.append('search', search);
                 if (category) params.append('category', category);
                 if (sort) params.append('sort', sort);
-                params.append('limit', '20');
+                params.append('limit', limit);
 
                 const [prodRes, catRes] = await Promise.all([
                     API.get(`/products?${params}`),
@@ -40,7 +41,7 @@ const Shop = () => {
             }
         };
         fetchData();
-    }, [search, category, sort]);
+    }, [search, category, sort, limit]);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -127,11 +128,29 @@ const Shop = () => {
                         <p className="text-sm mt-2">Try adjusting your search or filter</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                        {products.map(product => (
-                            <ProductCard key={product._id} product={product} />
-                        ))}
-                    </div>
+                    <>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                            {products.map(product => (
+                                <ProductCard key={product._id} product={product} />
+                            ))}
+                        </div>
+
+                        {/* Load More */}
+                        {products.length < total && (
+                            <div className="mt-12 text-center">
+                                <button
+                                    onClick={() => setSearchParams(prev => {
+                                        const currentLimit = parseInt(prev.get('limit') || '20');
+                                        prev.set('limit', currentLimit + 20);
+                                        return prev;
+                                    })}
+                                    className="btn-secondary px-8 py-3"
+                                >
+                                    Load More Products
+                                </button>
+                            </div>
+                        )}
+                    </>
                 )}
             </div>
         </div>
