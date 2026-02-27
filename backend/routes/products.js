@@ -5,8 +5,9 @@ const path = require('path');
 const fs = require('fs');
 const Product = require('../models/Product');
 const auth = require('../middleware/auth');
+const { deleteImages } = require('../utils/cloudinary');
 
-// Local storage setup as fallback
+// Local storage setup as fallback (used only if Cloudinary is not configured)
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = path.join(__dirname, '../uploads');
@@ -104,6 +105,7 @@ router.post('/', auth, upload.array('images', 5), async (req, res) => {
 });
 
 // PUT /api/products/:id - Admin only
+// ✅ SMART CLEANUP: Deletes old Cloudinary image when a new one is uploaded
 router.put('/:id', auth, upload.array('images', 5), async (req, res) => {
     try {
         const { name, description, price, originalPrice, categoryId, categoryName, meeshoLink, tags, isFeatured, isTrending, inStock, badge, rating, order } = req.body;
@@ -119,10 +121,28 @@ router.put('/:id', auth, upload.array('images', 5), async (req, res) => {
         if (inStock !== undefined) updateData.inStock = inStock === 'true' || inStock === true;
         if (rating !== undefined) updateData.rating = Number(rating);
         if (order !== undefined) updateData.order = Number(order);
+
+        // Determine if new images are incoming
+        let newImages = null;
         if (req.files && req.files.length > 0) {
-            updateData.images = req.files.map(f => `/uploads/${f.filename}`);
+            newImages = req.files.map(f => `/uploads/${f.filename}`);
         } else if (req.body.images) {
-            updateData.images = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+            newImages = typeof req.body.images === 'string' ? JSON.parse(req.body.images) : req.body.images;
+        }
+
+        if (newImages) {
+            // ✅ SMART CLEANUP: fetch old product and delete old Cloudinary images
+            const oldProduct = await Product.findById(req.params.id);
+            if (oldProduct && oldProduct.images && oldProduct.images.length > 0) {
+                const oldUrls = oldProduct.images.filter(img => img && img.includes('res.cloudinary.com'));
+                const newUrls = newImages.filter(img => img && img.includes('res.cloudinary.com'));
+                // Only delete images that are not being kept
+                const toDelete = oldUrls.filter(url => !newUrls.includes(url));
+                if (toDelete.length > 0) {
+                    deleteImages(toDelete).catch(err => console.warn('Cloudinary cleanup error:', err));
+                }
+            }
+            updateData.images = newImages;
         }
 
         const product = await Product.findByIdAndUpdate(req.params.id, updateData, { new: true });
@@ -146,10 +166,20 @@ router.put('/admin/reorder', auth, async (req, res) => {
 });
 
 // DELETE /api/products/:id - Admin only
+// ✅ SMART CLEANUP: Deletes all associated Cloudinary images when a product is deleted
 router.delete('/:id', auth, async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
         if (!product) return res.status(404).json({ message: 'Product not found' });
+
+        // ✅ Delete all Cloudinary images for this product (fire and forget)
+        if (product.images && product.images.length > 0) {
+            const cloudinaryImages = product.images.filter(img => img && img.includes('res.cloudinary.com'));
+            if (cloudinaryImages.length > 0) {
+                deleteImages(cloudinaryImages).catch(err => console.warn('Cloudinary cleanup on delete error:', err));
+            }
+        }
+
         res.json({ message: 'Product deleted' });
     } catch (err) {
         res.status(500).json({ message: 'Server error' });

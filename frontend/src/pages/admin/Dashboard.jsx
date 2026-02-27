@@ -107,6 +107,7 @@ const Dashboard = () => {
         }
     };
 
+    // ✅ AUTO-OPTIMIZATION: Compresses and converts image to WebP before upload
     const compressImage = (file) => {
         return new Promise((resolve) => {
             const reader = new FileReader();
@@ -131,14 +132,19 @@ const Dashboard = () => {
                     canvas.height = height;
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
+                    // ✅ Output as WebP at 85% quality for fast page loading
                     canvas.toBlob((blob) => {
-                        resolve(new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() }));
-                    }, 'image/jpeg', 0.85); // 85% quality
+                        const webpName = file.name.replace(/\.[^.]+$/, '') + '.webp';
+                        resolve(new File([blob], webpName, { type: 'image/webp', lastModified: Date.now() }));
+                    }, 'image/webp', 0.85);
                 };
             };
         });
     };
 
+    // ✅ PERMANENT URLS + AUTO-OPTIMIZATION: Uploads to Cloudinary and returns an
+    // optimized WebP URL that never expires. Images are stored under the
+    // 'alphastrix/' folder for organization.
     const uploadToCloudinary = async (file) => {
         const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
         const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
@@ -148,21 +154,29 @@ const Dashboard = () => {
             return null;
         }
 
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', uploadPreset);
+        const data = new FormData();
+        data.append('file', file);
+        data.append('upload_preset', uploadPreset);
+        data.append('folder', 'alphastrix');           // organise in Cloudinary dashboard
+        data.append('quality', 'auto');                // Cloudinary auto quality
+        data.append('fetch_format', 'auto');           // Serve WebP to modern browsers
 
         try {
             const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
                 method: 'POST',
-                body: formData
+                body: data
             });
-            const data = await res.json();
-            if (data.secure_url) return data.secure_url;
-            throw new Error(data.error?.message || 'Upload failed');
+            const json = await res.json();
+            if (json.error) throw new Error(json.error.message || 'Upload failed');
+            if (!json.secure_url) throw new Error('No URL returned from Cloudinary');
+
+            // ✅ Inject f_auto,q_auto into the URL for guaranteed WebP delivery
+            // e.g. /upload/v123/... → /upload/f_auto,q_auto/v123/...
+            const optimizedUrl = json.secure_url.replace('/upload/', '/upload/f_auto,q_auto/');
+            return optimizedUrl;
         } catch (err) {
             console.error('Cloudinary Error:', err);
-            toast.error('Cloudinary upload failed: ' + err.message);
+            toast.error('Image upload failed: ' + err.message);
             return null;
         }
     };
