@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API, { getImageUrl } from '../../utils/api';
 import toast from 'react-hot-toast';
-import { LogOut, Plus, Edit2, Trash2, Link as LinkIcon, Image as ImageIcon, Package, X, Grid } from 'lucide-react';
+import { LogOut, Plus, Edit2, Trash2, Link as LinkIcon, Image as ImageIcon, Package, X, Grid, Settings as SettingsIcon, Save } from 'lucide-react';
 
 const Dashboard = () => {
     const [products, setProducts] = useState([]);
@@ -10,6 +10,7 @@ const Dashboard = () => {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('products');
+    const [siteSettings, setSiteSettings] = useState({ whatsappNumber: '+919876543210' });
     const navigate = useNavigate();
 
     // Product Modal
@@ -32,14 +33,16 @@ const Dashboard = () => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const [prodRes, catRes, statRes] = await Promise.all([
+            const [prodRes, catRes, statRes, settingsRes] = await Promise.all([
                 API.get('/products?limit=100'),
                 API.get('/categories'),
-                API.get('/analytics')
+                API.get('/analytics'),
+                API.get('/settings')
             ]);
             setProducts(prodRes.data.products);
             setCategories(catRes.data);
             setStats(statRes.data);
+            if (settingsRes.data) setSiteSettings(settingsRes.data);
         } catch (err) {
             if (err.response?.status === 401) { localStorage.removeItem('adminToken'); navigate('/admin/login'); }
             toast.error('Failed to load dashboard data');
@@ -49,6 +52,16 @@ const Dashboard = () => {
     };
 
     const handleLogout = () => { localStorage.removeItem('adminToken'); navigate('/admin/login'); };
+
+    const handleSaveSettings = async (e) => {
+        e.preventDefault();
+        try {
+            await API.put('/settings', siteSettings);
+            toast.success('Settings saved successfully');
+        } catch (err) {
+            toast.error('Failed to save settings');
+        }
+    };
 
     const handleDelete = async (id) => {
         if (!window.confirm('Delete this product?')) return;
@@ -219,6 +232,12 @@ const Dashboard = () => {
                     >
                         <Package size={20} /> Products
                     </button>
+                    <button
+                        onClick={() => setActiveTab('settings')}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors font-heading uppercase tracking-wider text-sm ${activeTab === 'settings' ? 'bg-gold/10 text-gold border border-gold/30' : 'text-slate hover:bg-steel/50 hover:text-offwhite'}`}
+                    >
+                        <SettingsIcon size={20} /> Settings
+                    </button>
                 </nav>
 
                 <div className="p-4 border-t border-gold/20">
@@ -242,8 +261,9 @@ const Dashboard = () => {
                 </div>
 
                 {/* Mobile tabs */}
-                <div className="md:hidden flex border-b border-gold/20 bg-charcoal">
-                    <button onClick={() => setActiveTab('products')} className={`flex-1 py-3 text-sm font-heading uppercase tracking-wider ${activeTab === 'products' ? 'text-gold border-b-2 border-gold' : 'text-slate'}`}>Products</button>
+                <div className="md:hidden flex border-b border-gold/20 bg-charcoal w-full overflow-x-auto">
+                    <button onClick={() => setActiveTab('products')} className={`flex-1 py-3 px-4 text-sm font-heading uppercase tracking-wider whitespace-nowrap ${activeTab === 'products' ? 'text-gold border-b-2 border-gold' : 'text-slate'}`}>Products</button>
+                    <button onClick={() => setActiveTab('settings')} className={`flex-1 py-3 px-4 text-sm font-heading uppercase tracking-wider whitespace-nowrap ${activeTab === 'settings' ? 'text-gold border-b-2 border-gold' : 'text-slate'}`}>Settings</button>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 md:p-8 bg-navy">
@@ -333,6 +353,42 @@ const Dashboard = () => {
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </>
+                    )}
+                    {/* ── SETTINGS TAB ── */}
+                    {activeTab === 'settings' && (
+                        <>
+                            <div className="mb-6 mb-8">
+                                <h1 className="text-2xl font-bold text-offwhite font-heading uppercase tracking-wider">Site Settings</h1>
+                            </div>
+
+                            <div className="bg-steel p-6 rounded-xl border border-gold/10 max-w-2xl">
+                                <h2 className="text-lg font-bold text-gold font-heading uppercase mb-6 flex items-center gap-2">
+                                    <SettingsIcon size={20} /> Contacts & Social
+                                </h2>
+                                <form onSubmit={handleSaveSettings} className="space-y-6">
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate mb-2">WhatsApp Number</label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                value={siteSettings.whatsappNumber}
+                                                onChange={e => setSiteSettings({ ...siteSettings, whatsappNumber: e.target.value })}
+                                                className={inputCls}
+                                                placeholder="e.g. +919876543210"
+                                                required
+                                            />
+                                        </div>
+                                        <p className="text-xs text-slate mt-2">This number is used for the floating WhatsApp button and on the contact pages.</p>
+                                    </div>
+
+                                    <div className="pt-4 border-t border-gold/20 flex justify-end">
+                                        <button type="submit" className="btn-primary py-2.5 px-6 flex items-center gap-2">
+                                            <Save size={18} /> Save Settings
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </>
                     )}

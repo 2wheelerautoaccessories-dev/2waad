@@ -1,7 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Youtube, Mail, MapPin } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Mail, MapPin, Phone } from 'lucide-react';
+import API from '../utils/api';
 
 const Footer = () => {
+    const [phone, setPhone] = useState('+919876543210');
+
+    useEffect(() => {
+        API.get('/settings').then(res => {
+            if (res.data?.whatsappNumber) setPhone(res.data.whatsappNumber);
+        }).catch(() => { });
+    }, []);
+
     return (
         <footer className="bg-charcoal pt-16 pb-8 border-t border-gold/20 mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,6 +87,10 @@ const Footer = () => {
                             <li className="flex items-center gap-3 text-sm text-slate">
                                 <Mail size={18} className="text-gold shrink-0" />
                                 <a href="mailto:contact@alphastrix.in" className="hover:text-gold transition-colors">contact@alphastrix.in</a>
+                            </li>
+                            <li className="flex items-center gap-3 text-sm text-slate">
+                                <Phone size={18} className="text-gold shrink-0" />
+                                <a href={`tel:${phone}`} className="hover:text-gold transition-colors">{phone}</a>
                             </li>
                         </ul>
                     </div>

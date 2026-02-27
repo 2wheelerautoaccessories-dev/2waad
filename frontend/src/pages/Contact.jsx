@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send, Phone } from 'lucide-react';
+import API from '../utils/api';
 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [loading, setLoading] = useState(false);
+    const [phone, setPhone] = useState('+919876543210');
+
+    useEffect(() => {
+        API.get('/settings').then(res => {
+            if (res.data?.whatsappNumber) setPhone(res.data.whatsappNumber);
+        }).catch(() => { });
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,6 +57,18 @@ const Contact = () => {
                                 <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Email Us</h3>
                                 <a href="mailto:contact@alphastrix.in" className="text-gold hover:text-gold-lt block transition-colors">
                                     contact@alphastrix.in
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="bg-steel/50 p-6 rounded-xl border border-gold/20 flex gap-6">
+                            <div className="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold shrink-0">
+                                <Phone size={24} />
+                            </div>
+                            <div>
+                                <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Call/WhatsApp</h3>
+                                <a href={`tel:${phone}`} className="text-gold hover:text-gold-lt block transition-colors">
+                                    {phone}
                                 </a>
                             </div>
                         </div>
