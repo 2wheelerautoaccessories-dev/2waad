@@ -51,14 +51,14 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?q=80&w=1920&auto=format&fit=crop"
+                        src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1920&auto=format&fit=crop"
                         alt="Alpha Strix Signature Collection"
-                        className="w-full h-full object-cover object-center"
+                        className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
                         loading="eager"
                     />
-                    {/* Lighter overlays to ensure image visibility */}
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)' }}></div>
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%)' }}></div>
+                    {/* Balanced overlays for visibility and readability */}
+                    <div className="absolute inset-0 bg-navy/40"></div>
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }}></div>
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -90,36 +90,40 @@ const Home = () => {
             <section className="py-16 sm:py-20 bg-charcoal">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-5xl font-bold mb-4 text-offwhite">Shop by Category</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-offwhite uppercase tracking-tight">Shop by Category</h2>
                         <div className="w-16 h-1 bg-gold mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {categories.slice(0, 4).map((cat, i) => (
-                            <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-colors">
-                                <div className="absolute inset-0 bg-steel/30"></div>
+                            <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-80 sm:h-96 rounded-2xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-all duration-500 shadow-2xl">
                                 {(() => {
                                     const catImages = {
-                                        'T-Shirts': 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=800',
-                                        'Shirts': 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800',
-                                        'Accessories': 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500',
-                                        'Footwear': 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500'
+                                        'T-Shirts': 'https://images.unsplash.com/photo-1562157873-818bc0726f68?q=80&w=1000',
+                                        'Shirts': 'https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?q=80&w=1000',
+                                        'Accessories': 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000',
+                                        'Footwear': 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000'
                                     };
                                     return (
                                         <img
-                                            src={getImageUrl(cat.image) || catImages[cat.name] || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500'}
+                                            src={getImageUrl(cat.image) || catImages[cat.name] || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1000'}
                                             alt={cat.name}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                                             loading="lazy"
                                         />
                                     );
                                 })()}
-                                <div className="absolute inset-0 bg-navy/50 group-hover:bg-navy/70 transition-colors duration-300"></div>
-                                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
-                                    <div className="flex justify-between items-end">
-                                        <h3 className="text-lg sm:text-2xl font-heading font-bold text-offwhite uppercase tracking-wider">{cat.name}</h3>
-                                        <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gold/20 backdrop-blur flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-navy transition-colors shrink-0">
-                                            <ArrowRight size={16} />
+                                {/* Subtle gradient for text readability without blurring the image */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+
+                                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                                    <div className="flex justify-between items-end transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                        <div>
+                                            <p className="text-gold text-xs font-bold tracking-widest uppercase mb-1">Explore</p>
+                                            <h3 className="text-2xl sm:text-3xl font-heading font-extrabold text-offwhite uppercase tracking-tighter leading-none">{cat.name}</h3>
+                                        </div>
+                                        <span className="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-navy transform -rotate-45 group-hover:rotate-0 transition-all duration-500 shadow-xl">
+                                            <ArrowRight size={20} />
                                         </span>
                                     </div>
                                 </div>
