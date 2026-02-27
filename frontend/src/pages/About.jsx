@@ -1,12 +1,24 @@
-import { Shield, Star, Zap, Mail, MapPin } from 'lucide-react';
-import { useState } from 'react';
+import { Shield, Star, Zap, Mail, MapPin, Phone } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import API from '../utils/api';
 
 const ABOUT_IMAGE = 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop';
 
 const About = () => {
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [loading, setLoading] = useState(false);
+    const [settings, setSettings] = useState({
+        whatsappNumber: '+919876543210',
+        email: 'contact@alphastrix.in',
+        address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
+    });
+
+    useEffect(() => {
+        API.get('/settings').then(res => {
+            if (res.data) setSettings(res.data);
+        }).catch(() => { });
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -128,9 +140,8 @@ const About = () => {
                                 </div>
                                 <div>
                                     <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Our Location</h3>
-                                    <p className="text-slate leading-relaxed">
-                                        Tarnaka, Hyderabad,<br />
-                                        Telangana, 500007
+                                    <p className="text-slate leading-relaxed whitespace-pre-line">
+                                        {settings.address}
                                     </p>
                                 </div>
                             </div>
@@ -141,8 +152,20 @@ const About = () => {
                                 </div>
                                 <div>
                                     <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Email Us</h3>
-                                    <a href="mailto:contact@alphastrix.in" className="text-gold hover:text-gold-lt block transition-colors">
-                                        contact@alphastrix.in
+                                    <a href={`mailto:${settings.email}`} className="text-gold hover:text-gold-lt block transition-colors">
+                                        {settings.email}
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="bg-steel/50 p-6 rounded-xl border border-gold/20 flex gap-6">
+                                <div className="w-14 h-14 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold shrink-0">
+                                    <Phone size={24} />
+                                </div>
+                                <div>
+                                    <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Call/WhatsApp</h3>
+                                    <a href={`tel:${settings.whatsappNumber}`} className="text-gold hover:text-gold-lt block transition-colors">
+                                        {settings.whatsappNumber}
                                     </a>
                                 </div>
                             </div>

@@ -19,15 +19,17 @@ router.get('/', async (req, res) => {
 // Update settings (admin only)
 router.put('/', auth, async (req, res) => {
     try {
-        const { whatsappNumber } = req.body;
+        const { whatsappNumber, email, address } = req.body;
         let settings = await Settings.findOne();
 
         if (settings) {
             settings.whatsappNumber = whatsappNumber || settings.whatsappNumber;
+            settings.email = email || settings.email;
+            settings.address = address || settings.address;
             settings.updatedAt = Date.now();
             await settings.save();
         } else {
-            settings = await Settings.create({ whatsappNumber });
+            settings = await Settings.create({ whatsappNumber, email, address });
         }
 
         res.json(settings);

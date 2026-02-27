@@ -4,11 +4,15 @@ import { Instagram, Facebook, Youtube, Mail, MapPin, Phone } from 'lucide-react'
 import API from '../utils/api';
 
 const Footer = () => {
-    const [phone, setPhone] = useState('+919876543210');
+    const [settings, setSettings] = useState({
+        whatsappNumber: '+919876543210',
+        email: 'contact@alphastrix.in',
+        address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
+    });
 
     useEffect(() => {
         API.get('/settings').then(res => {
-            if (res.data?.whatsappNumber) setPhone(res.data.whatsappNumber);
+            if (res.data) setSettings(res.data);
         }).catch(() => { });
     }, []);
 
@@ -82,15 +86,15 @@ const Footer = () => {
                         <ul className="space-y-3">
                             <li className="flex items-start gap-3 text-sm text-slate">
                                 <MapPin size={18} className="text-gold shrink-0 mt-0.5" />
-                                <span>Tarnaka, Hyderabad,<br />Telangana, 500007</span>
+                                <span className="whitespace-pre-line">{settings.address}</span>
                             </li>
                             <li className="flex items-center gap-3 text-sm text-slate">
                                 <Mail size={18} className="text-gold shrink-0" />
-                                <a href="mailto:contact@alphastrix.in" className="hover:text-gold transition-colors">contact@alphastrix.in</a>
+                                <a href={`mailto:${settings.email}`} className="hover:text-gold transition-colors">{settings.email}</a>
                             </li>
                             <li className="flex items-center gap-3 text-sm text-slate">
                                 <Phone size={18} className="text-gold shrink-0" />
-                                <a href={`tel:${phone}`} className="hover:text-gold transition-colors">{phone}</a>
+                                <a href={`tel:${settings.whatsappNumber}`} className="hover:text-gold transition-colors">{settings.whatsappNumber}</a>
                             </li>
                         </ul>
                     </div>

@@ -10,7 +10,11 @@ const Dashboard = () => {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('products');
-    const [siteSettings, setSiteSettings] = useState({ whatsappNumber: '+919876543210' });
+    const [siteSettings, setSiteSettings] = useState({
+        whatsappNumber: '',
+        email: '',
+        address: ''
+    });
     const navigate = useNavigate();
 
     // Product Modal
@@ -373,7 +377,7 @@ const Dashboard = () => {
                                         <div className="flex gap-2">
                                             <input
                                                 type="text"
-                                                value={siteSettings.whatsappNumber}
+                                                value={siteSettings.whatsappNumber || ''}
                                                 onChange={e => setSiteSettings({ ...siteSettings, whatsappNumber: e.target.value })}
                                                 className={inputCls}
                                                 placeholder="e.g. +919876543210"
@@ -381,6 +385,34 @@ const Dashboard = () => {
                                             />
                                         </div>
                                         <p className="text-xs text-slate mt-2">This number is used for the floating WhatsApp button and on the contact pages.</p>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate mb-2">Email Address</label>
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="email"
+                                                value={siteSettings.email || ''}
+                                                onChange={e => setSiteSettings({ ...siteSettings, email: e.target.value })}
+                                                className={inputCls}
+                                                placeholder="e.g. contact@alphastrix.in"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate mb-2">Physical Address</label>
+                                        <div className="flex gap-2">
+                                            <textarea
+                                                rows="3"
+                                                value={siteSettings.address || ''}
+                                                onChange={e => setSiteSettings({ ...siteSettings, address: e.target.value })}
+                                                className={`${inputCls} resize-none`}
+                                                placeholder={"e.g. Tarnaka, Hyderabad,\nTelangana, 500007"}
+                                                required
+                                            ></textarea>
+                                        </div>
                                     </div>
 
                                     <div className="pt-4 border-t border-gold/20 flex justify-end">

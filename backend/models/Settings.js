@@ -5,6 +5,14 @@ const settingsSchema = new mongoose.Schema({
         type: String,
         default: '+919876543210'
     },
+    email: {
+        type: String,
+        default: 'contact@alphastrix.in'
+    },
+    address: {
+        type: String,
+        default: 'Tarnaka, Hyderabad,\nTelangana, 500007'
+    },
     updatedAt: {
         type: Date,
         default: Date.now

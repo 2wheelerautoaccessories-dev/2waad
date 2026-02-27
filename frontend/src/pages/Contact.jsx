@@ -6,11 +6,15 @@ import API from '../utils/api';
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [loading, setLoading] = useState(false);
-    const [phone, setPhone] = useState('+919876543210');
+    const [settings, setSettings] = useState({
+        whatsappNumber: '+919876543210',
+        email: 'contact@alphastrix.in',
+        address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
+    });
 
     useEffect(() => {
         API.get('/settings').then(res => {
-            if (res.data?.whatsappNumber) setPhone(res.data.whatsappNumber);
+            if (res.data) setSettings(res.data);
         }).catch(() => { });
     }, []);
 
@@ -42,9 +46,8 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Our Location</h3>
-                                <p className="text-slate leading-relaxed">
-                                    Tarnaka, Hyderabad,<br />
-                                    Telangana, 500007
+                                <p className="text-slate leading-relaxed whitespace-pre-line">
+                                    {settings.address}
                                 </p>
                             </div>
                         </div>
@@ -55,8 +58,8 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Email Us</h3>
-                                <a href="mailto:contact@alphastrix.in" className="text-gold hover:text-gold-lt block transition-colors">
-                                    contact@alphastrix.in
+                                <a href={`mailto:${settings.email}`} className="text-gold hover:text-gold-lt block transition-colors">
+                                    {settings.email}
                                 </a>
                             </div>
                         </div>
@@ -67,8 +70,8 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h3 className="font-heading font-bold text-lg mb-2 text-offwhite uppercase tracking-wide">Call/WhatsApp</h3>
-                                <a href={`tel:${phone}`} className="text-gold hover:text-gold-lt block transition-colors">
-                                    {phone}
+                                <a href={`tel:${settings.whatsappNumber}`} className="text-gold hover:text-gold-lt block transition-colors">
+                                    {settings.whatsappNumber}
                                 </a>
                             </div>
                         </div>
