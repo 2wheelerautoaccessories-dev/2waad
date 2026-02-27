@@ -100,7 +100,7 @@ const Home = () => {
                                 {(() => {
                                     const catImages = {
                                         'T-Shirts': 'https://images.unsplash.com/photo-1562157873-818bc0726f68?q=80&w=1000',
-                                        'Shirts': 'https://images.unsplash.com/photo-1620012253295-c05c609df143?q=80&w=1000',
+                                        'Shirts': 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=1000',
                                         'Accessories': 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000',
                                         'Footwear': 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000'
                                     };
