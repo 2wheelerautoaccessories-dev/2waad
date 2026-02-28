@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 const auth = require('../middleware/auth');
 const { deleteImages, uploadToCloudinary } = require('../utils/cloudinary');
 
@@ -26,7 +27,14 @@ router.get('/', async (req, res) => {
         const { category, featured, trending, search, minPrice, maxPrice, sort, page = 1, limit = 20 } = req.query;
         const query = {};
 
-        if (category) query.categoryName = { $regex: category, $options: 'i' };
+        if (category) {
+            const cat = await Category.findOne({ $or: [{ slug: category }, { name: category }] });
+            if (cat) {
+                query.category = cat._id;
+            } else {
+                query.categoryName = { $regex: category, $options: 'i' };
+            }
+        }
         if (featured === 'true') query.isFeatured = true;
         if (trending === 'true') query.isTrending = true;
         if (search) query.$or = [
