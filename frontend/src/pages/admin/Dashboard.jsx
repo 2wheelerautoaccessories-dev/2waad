@@ -144,7 +144,7 @@ const Dashboard = () => {
 
     // ✅ PERMANENT URLS + AUTO-OPTIMIZATION: Uploads to Cloudinary and returns an
     // optimized WebP URL that never expires. Images are stored under the
-    // 'alphastrix/' folder for organization.
+    // '2waad/' folder for organization.
     const uploadToCloudinary = async (file) => {
         const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
         const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
@@ -157,7 +157,7 @@ const Dashboard = () => {
         const data = new FormData();
         data.append('file', file);
         data.append('upload_preset', uploadPreset);
-        data.append('folder', 'alphastrix');           // organise in Cloudinary dashboard
+        data.append('folder', '2waad');                 // organise in Cloudinary dashboard
         data.append('quality', 'auto');                // Cloudinary auto quality
         data.append('fetch_format', 'auto');           // Serve WebP to modern browsers
 
@@ -240,7 +240,7 @@ const Dashboard = () => {
                     <div className="w-10 h-10 flex items-center justify-center">
                         <img src="/logo.png" alt="Logo" className="w-full h-full object-contain brightness-110" />
                     </div>
-                    <span className="font-heading text-xl font-bold text-gold tracking-widest uppercase">Alpha Strix</span>
+                    <span className="font-heading text-xl font-bold text-gold tracking-widest uppercase">2waad</span>
                 </div>
 
                 <nav className="flex-1 py-6 px-4 space-y-2">
@@ -273,7 +273,7 @@ const Dashboard = () => {
                         <div className="w-8 h-8 flex items-center justify-center">
                             <img src="/logo.png" alt="Logo" className="w-full h-full object-contain brightness-110" />
                         </div>
-                        <span className="font-heading text-lg font-bold text-gold uppercase tracking-widest">Alpha Strix</span>
+                        <span className="font-heading text-lg font-bold text-gold uppercase tracking-widest">2waad</span>
                     </div>
                     <button onClick={handleLogout} className="text-red-400"><LogOut size={20} /></button>
                 </div>
@@ -409,7 +409,7 @@ const Dashboard = () => {
                                                 value={siteSettings.email || ''}
                                                 onChange={e => setSiteSettings({ ...siteSettings, email: e.target.value })}
                                                 className={inputCls}
-                                                placeholder="e.g. contact@alphastrix.in"
+                                                placeholder="e.g. contact@2waad.com"
                                                 required
                                             />
                                         </div>

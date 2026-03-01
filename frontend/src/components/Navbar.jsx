@@ -9,18 +9,18 @@ const Navbar = () => {
     const dropdownRef = useRef(null);
 
     const categories = [
-        { name: 'T-Shirts', path: '/category/t-shirts' },
-        { name: 'Shirts', path: '/category/shirts' },
-        { name: 'Suits', path: '/category/suits' },
-        { name: 'Blazers', path: '/category/blazers' },
-        { name: 'Trousers', path: '/category/trousers' },
-        { name: 'Jeans', path: '/category/jeans' },
-        { name: 'Shorts', path: '/category/shorts' },
-        { name: 'Hoodies', path: '/category/hoodies' },
-        { name: 'Gym Wear', path: '/category/gym-wear' },
-        { name: 'Innerwear', path: '/category/innerwear' },
-        { name: 'Accessories', path: '/category/accessories' },
-        { name: 'Footwear', path: '/category/footwear' },
+        { name: 'Helmets', path: '/category/helmets' },
+        { name: 'Riding Gloves', path: '/category/riding-gloves' },
+        { name: 'Riding Jackets', path: '/category/riding-jackets' },
+        { name: 'Bike Covers', path: '/category/bike-covers' },
+        { name: 'Mirrors', path: '/category/mirrors' },
+        { name: 'Lights & LEDs', path: '/category/lights-leds' },
+        { name: 'Grips & Handlebars', path: '/category/grips-handlebars' },
+        { name: 'Locks & Security', path: '/category/locks-security' },
+        { name: 'Phone Mounts', path: '/category/phone-mounts' },
+        { name: 'Luggage & Bags', path: '/category/luggage-bags' },
+        { name: 'Cleaning & Care', path: '/category/cleaning-care' },
+        { name: 'Stickers & Decals', path: '/category/stickers-decals' },
     ];
 
     const navLinks = [
@@ -29,7 +29,6 @@ const Navbar = () => {
         { name: 'About', path: '/about' },
     ];
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -50,16 +49,16 @@ const Navbar = () => {
                         <div className="relative w-12 h-12 flex items-center justify-center">
                             <img
                                 src="/logo.png"
-                                alt="Alpha Strix Logo"
+                                alt="2waad Logo"
                                 className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_0_8px_rgba(192,192,192,0.3)] group-hover:drop-shadow-[0_0_12px_rgba(192,192,192,0.5)] transition-all duration-300"
                             />
                         </div>
                         <div className="flex flex-col -space-y-1">
                             <span className="font-heading text-2xl font-extrabold text-gold tracking-widest uppercase transition-all duration-300 group-hover:text-offwhite group-hover:tracking-[0.15em]">
-                                Alpha Strix
+                                2waad
                             </span>
-                            <span className="text-[10px] text-slate font-medium tracking-[0.4em] uppercase opacity-70">
-                                The Alpha Collection
+                            <span className="text-[10px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
+                                Two Wheeler Auto Accessories Den
                             </span>
                         </div>
                     </Link>
@@ -69,14 +68,14 @@ const Navbar = () => {
                         <Link to="/" className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest">Home</Link>
                         <Link to="/shop" className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest">Shop</Link>
 
-                        {/* Collections Dropdown */}
+                        {/* Categories Dropdown */}
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                 onMouseEnter={() => setIsDropdownOpen(true)}
                                 className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest flex items-center gap-1.5 py-8"
                             >
-                                Collections <ChevronDown size={14} className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                Categories <ChevronDown size={14} className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                             </button>
 
                             <AnimatePresence>

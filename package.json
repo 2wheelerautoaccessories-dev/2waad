@@ -1,7 +1,7 @@
 {
-    "name": "alphastrix",
+    "name": "2waad",
     "version": "1.0.0",
-    "description": "Alpha Strix - Premium Men's Fashion E-Commerce",
+    "description": "2waad - Two Wheeler Auto Accessories Den",
     "scripts": {
         "dev:backend": "cd backend && npm run dev",
         "dev:frontend": "cd frontend && npm run dev",

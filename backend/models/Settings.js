@@ -7,7 +7,7 @@ const settingsSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        default: 'contact@alphastrix.in'
+        default: 'contact@2waad.com'
     },
     address: {
         type: String,

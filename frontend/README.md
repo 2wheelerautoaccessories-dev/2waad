@@ -1,16 +1,44 @@
-# React + Vite
+# 🖥️ 2waad: Frontend Architecture (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the frontend of **2waad** — Two Wheeler Auto Accessories Den. This React application is built on **Vite** for maximum development speed and optimized production performance.
 
-Currently, two official plugins are available:
+## 🚀 Key Technologies
+- **React 19:** Utilizing the latest hooks and concurrent features.
+- **Tailwind CSS 4.0:** A powerful, utility-first CSS framework.
+- **Framer Motion:** Smooth, hardware-accelerated transitions and interactive elements.
+- **Axios:** Centralized API communication with interceptors for auth and image optimization.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Key Directories
+- `/src/components`: Reusable UI components (Navbar, ProductCard, Footer, FloatingWhatsApp)
+- `/src/pages`: Functional page components (Home, Shop, About, Contact, Admin Dashboard)
+- `/src/utils`: Helper functions and API configuration.
+- `/src/context`: SettingsContext for global site settings.
 
-## React Compiler
+## 🎨 Design System (Steel Rider)
+The **Steel Rider** dark theme uses:
+- `#111111` Navy (background), `#000000` Steel (cards), `#C0C0C0` Platinum (accents)
+- Fonts: **Outfit** (headings) + **Inter** (body)
+- Glassmorphism navbar + Framer Motion animations
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Local Development
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. Build for production:
+   ```bash
+   npm run build
+   ```
 
-## Expanding the ESLint configuration
+## 🌐 Production Ready
+The production build is fully optimized, with assets minimized and images served via **Cloudinary's Global CDN** (folder: `2waad`) for sub-second load times.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Cloudinary Upload Preset:** `2waad_upload`
+- **Production API:** `https://2waad-backend.onrender.com/api`
+
+---
+*For the full project documentation, check the root `README.md`.*

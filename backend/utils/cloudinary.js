@@ -9,8 +9,8 @@ cloudinary.config({
 
 /**
  * Extracts the public_id from a full Cloudinary URL.
- * e.g. https://res.cloudinary.com/dotyywlqu/image/upload/v1234567/alphastrix/abc123.webp
- * → alphastrix/abc123
+ * e.g. https://res.cloudinary.com/dm0xxbz3s/image/upload/v1234567/2waad/abc123.webp
+ * → 2waad/abc123
  */
 const getPublicId = (url) => {
     if (!url || !url.includes('res.cloudinary.com')) return null;
@@ -58,7 +58,7 @@ const uploadToCloudinary = async (localPath) => {
     if (!localPath) return null;
     try {
         const result = await cloudinary.uploader.upload(localPath, {
-            folder: 'alphastrix',
+            folder: '2waad',
             resource_type: 'auto'
         });
 

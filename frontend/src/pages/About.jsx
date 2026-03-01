@@ -3,7 +3,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSettings } from '../context/SettingsContext';
 
-const ABOUT_IMAGE = 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop';
+const ABOUT_IMAGE = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop';
 
 const About = () => {
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -29,10 +29,10 @@ const About = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                     <span className="block text-gold font-heading text-lg tracking-widest uppercase mb-2">Our Story</span>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 text-offwhite">
-                        Built for the <br /> Alpha Male
+                        Built for <br /> Every Rider
                     </h1>
                     <p className="text-slate max-w-2xl mx-auto text-lg leading-relaxed">
-                        Welcome to Alpha Strix, your ultimate destination for premium men's fashion, accessories, and footwear.
+                        Welcome to 2waad — your ultimate destination for premium two-wheeler accessories. Two Wheeler Auto Accessories Den.
                     </p>
                 </div>
             </div>
@@ -45,10 +45,10 @@ const About = () => {
                             <div className="absolute inset-0 bg-gold/10 rounded-xl transform translate-x-4 translate-y-4 border border-gold/20"></div>
                             <img
                                 src={ABOUT_IMAGE}
-                                alt="Alpha Strix men's fashion"
+                                alt="2waad two-wheeler accessories"
                                 className="relative z-10 w-full h-[500px] object-cover object-center rounded-xl shadow-2xl border border-gold/20"
                                 loading="lazy"
-                                onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop'; }}
+                                onError={(e) => { e.target.onerror = null; e.target.src = 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=800&auto=format&fit=crop'; }}
                             />
                         </div>
 
@@ -56,10 +56,10 @@ const About = () => {
                             <h2 className="text-3xl font-bold font-heading text-offwhite">Our Mission</h2>
                             <div className="w-16 h-1 bg-gold rounded-full"></div>
                             <p className="text-slate leading-relaxed">
-                                Alpha Strix was born from a passion to curate the best in men's fashion. We believe every man deserves to look sharp, feel confident, and express himself through premium style.
+                                2waad was born from a passion for riding. We believe every rider deserves the best gear — whether you're commuting daily or hitting the highway. We curate only the finest accessories for your two-wheeler.
                             </p>
                             <p className="text-slate leading-relaxed">
-                                As a curated showcase platform, we handpick the finest t-shirts, formal shirts, accessories, and footwear. We partner with trusted sellers via Meesho to ensure secure, reliable purchasing.
+                                As a curated showcase platform, we handpick top-rated helmets, riding jackets, lights, mirrors, and more. We partner with trusted sellers to ensure secure, reliable purchasing for every biker and scooter rider.
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
@@ -69,7 +69,7 @@ const About = () => {
                                     </div>
                                     <div>
                                         <h4 className="font-heading font-bold mb-1 text-offwhite uppercase tracking-wide text-sm">Curated with Pride</h4>
-                                        <p className="text-sm text-slate">Only the best quality items on our platform.</p>
+                                        <p className="text-sm text-slate">Only the best quality accessories on our platform.</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
@@ -78,7 +78,7 @@ const About = () => {
                                     </div>
                                     <div>
                                         <h4 className="font-heading font-bold mb-1 text-offwhite uppercase tracking-wide text-sm">Authentic Buying</h4>
-                                        <p className="text-sm text-slate">Secure transactions through Meesho.</p>
+                                        <p className="text-sm text-slate">Secure transactions through verified sellers.</p>
                                     </div>
                                 </div>
                             </div>
@@ -90,12 +90,12 @@ const About = () => {
             {/* Values */}
             <section className="py-20 bg-charcoal">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl font-bold font-heading mb-12 text-offwhite uppercase tracking-wider">The Alpha Strix Promise</h2>
+                    <h2 className="text-3xl font-bold font-heading mb-12 text-offwhite uppercase tracking-wider">The 2waad Promise</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                         <div className="bg-steel/50 p-8 rounded-xl border border-gold/10 hover:border-gold/30 transition-colors hover:shadow-2xl">
                             <Star className="w-12 h-12 text-gold mx-auto mb-4" />
                             <h3 className="font-heading font-bold text-xl mb-3 text-gold uppercase tracking-wider">Premium Quality</h3>
-                            <p className="text-slate text-sm leading-relaxed">Uncompromising quality in every piece we showcase for the modern man.</p>
+                            <p className="text-slate text-sm leading-relaxed">Uncompromising quality in every accessory we showcase for the modern rider.</p>
                         </div>
                         <div className="bg-steel/50 p-8 rounded-xl border border-gold/10 hover:border-gold/30 transition-colors hover:shadow-2xl transform md:-translate-y-4">
                             <Shield className="w-12 h-12 text-gold mx-auto mb-4" />
@@ -104,8 +104,8 @@ const About = () => {
                         </div>
                         <div className="bg-steel/50 p-8 rounded-xl border border-gold/10 hover:border-gold/30 transition-colors hover:shadow-2xl">
                             <Zap className="w-12 h-12 text-gold mx-auto mb-4" />
-                            <h3 className="font-heading font-bold text-xl mb-3 text-gold uppercase tracking-wider">Bold First</h3>
-                            <p className="text-slate text-sm leading-relaxed">Your bold style is our priority. We feature products loved by real men.</p>
+                            <h3 className="font-heading font-bold text-xl mb-3 text-gold uppercase tracking-wider">Rider First</h3>
+                            <p className="text-slate text-sm leading-relaxed">Your safety and riding experience is our priority. We feature gear trusted by real riders.</p>
                         </div>
                     </div>
                 </div>

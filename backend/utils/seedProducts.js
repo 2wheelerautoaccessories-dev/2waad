@@ -4,99 +4,25 @@ const Settings = require('../models/Settings');
 
 module.exports = async function seedProducts() {
     try {
-        // Check if we have already seeded once (via a flag in Settings)
-        // This prevents products from reappearing if the user intentionally deletes them
         let settings = await Settings.findOne();
         if (!settings) {
             settings = await Settings.create({});
         }
 
-        // Create categories for men's fashion
+        // Create categories for two-wheeler accessories
         const cats = [
-            {
-                name: 'T-Shirts',
-                slug: 't-shirts',
-                description: 'Stylish men\'s t-shirts and casual tops',
-                image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500',
-                order: 1
-            },
-            {
-                name: 'Shirts',
-                slug: 'shirts',
-                description: 'Formal and casual shirts for men',
-                image: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=500',
-                order: 2
-            },
-            {
-                name: 'Suits',
-                slug: 'suits',
-                description: 'Premium men\'s suits for formal excellence',
-                image: 'https://images.unsplash.com/photo-1594932224528-9460c5de307c?q=80&w=500',
-                order: 3
-            },
-            {
-                name: 'Blazers',
-                slug: 'blazers',
-                description: 'Elegant blazers for a sharp, sophisticated look',
-                image: 'https://images.unsplash.com/photo-1555069519-127aadedf1ee?q=80&w=500',
-                order: 4
-            },
-            {
-                name: 'Trousers',
-                slug: 'trousers',
-                description: 'Classic and modern trousers for men',
-                image: 'https://images.unsplash.com/photo-1624371414361-e6e0efc5831f?q=80&w=500',
-                order: 5
-            },
-            {
-                name: 'Jeans',
-                slug: 'jeans',
-                description: 'Durable and stylish denim for every occasion',
-                image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=500',
-                order: 6
-            },
-            {
-                name: 'Shorts',
-                slug: 'shorts',
-                description: 'Casual and comfortable shorts for men',
-                image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=500',
-                order: 7
-            },
-            {
-                name: 'Hoodies',
-                slug: 'hoodies',
-                description: 'Premium hoodies and sweatshirts for warmth and style',
-                image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=500',
-                order: 8
-            },
-            {
-                name: 'Gym Wear',
-                slug: 'gym-wear',
-                description: 'High-performance activewear for your workouts',
-                image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=500',
-                order: 9
-            },
-            {
-                name: 'Innerwear',
-                slug: 'innerwear',
-                description: 'Comfortable and premium men\'s innerwear',
-                image: 'https://images.unsplash.com/photo-1590483736622-39da8af75bba?q=80&w=500',
-                order: 10
-            },
-            {
-                name: 'Accessories',
-                slug: 'accessories',
-                description: 'Men\'s fashion accessories and essentials',
-                image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?q=80&w=500',
-                order: 11
-            },
-            {
-                name: 'Footwear',
-                slug: 'footwear',
-                description: 'Stylish men\'s footwear and sneakers',
-                image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500',
-                order: 12
-            },
+            { name: 'Helmets', slug: 'helmets', description: 'Certified protective headgear for riders', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=500', order: 1 },
+            { name: 'Riding Gloves', slug: 'riding-gloves', description: 'Premium gloves for grip and protection', image: 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=500', order: 2 },
+            { name: 'Riding Jackets', slug: 'riding-jackets', description: 'Abrasion-resistant jackets for safety', image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?q=80&w=500', order: 3 },
+            { name: 'Bike Covers', slug: 'bike-covers', description: 'Weatherproof protection for your bike', image: 'https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=500', order: 4 },
+            { name: 'Mirrors', slug: 'mirrors', description: 'Custom and replacement rear-view mirrors', image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=500', order: 5 },
+            { name: 'Lights & LEDs', slug: 'lights-leds', description: 'High-visibility LED lights and fog lamps', image: 'https://images.unsplash.com/photo-1544919982-b61976f0ba43?q=80&w=500', order: 6 },
+            { name: 'Grips & Handlebars', slug: 'grips-handlebars', description: 'Ergonomic grips and custom handlebars', image: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=500', order: 7 },
+            { name: 'Locks & Security', slug: 'locks-security', description: 'Durable disc locks and chain security', image: 'https://images.unsplash.com/photo-1558618047-3d2e2d2a7d48?q=80&w=500', order: 8 },
+            { name: 'Phone Mounts', slug: 'phone-mounts', description: 'Secure handlebar mounts for navigation', image: 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?q=80&w=500', order: 9 },
+            { name: 'Luggage & Bags', slug: 'luggage-bags', description: 'Tail bags, tank bags, and saddlebags', image: 'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=500', order: 10 },
+            { name: 'Cleaning & Care', slug: 'cleaning-care', description: 'Chain lubes, polishes, and microfiber cloths', image: 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=500', order: 11 },
+            { name: 'Stickers & Decals', slug: 'stickers-decals', description: 'Reflective and decorative vinyl decals', image: 'https://images.unsplash.com/photo-1558980395-be9a5e7e2e9a?q=80&w=500', order: 12 },
         ];
 
         const createdCats = {};
@@ -109,143 +35,30 @@ module.exports = async function seedProducts() {
             return;
         }
 
-        // Sample products for men's wear
+        // Sample products for 2waad
         const products = [
-            // T-Shirts
             {
-                name: 'Oversized Graphic Tee', description: 'Premium oversized graphic t-shirt with bold street-art print, perfect for a casual look',
-                price: 399, originalPrice: 799, category: createdCats['t-shirts']._id, categoryName: 'T-Shirts',
-                meeshoLink: 'https://www.meesho.com/oversized-graphic-tee/p/1',
-                isFeatured: true, isTrending: true, badge: 'Hot', rating: 4.8, order: 1,
-                images: ['https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500'],
-                tags: ['oversized', 'graphic', 'streetwear', 'tshirt']
+                name: 'Steel-Series Full Face Helmet', description: 'DOT certified aerodynamic full-face helmet with dual visor and anti-fog coating',
+                price: 2490, originalPrice: 4990, category: createdCats['helmets']._id, categoryName: 'Helmets',
+                meeshoLink: 'https://www.meesho.com/helmet/p/1',
+                isFeatured: true, isTrending: true, badge: 'Best Seller', rating: 4.9, order: 1,
+                images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800'],
+                tags: ['helmet', 'safety', 'riding']
             },
             {
-                name: 'Premium Plain Polo T-Shirt', description: 'Classic polo t-shirt in premium cotton blend, great for semi-casual occasions',
-                price: 499, originalPrice: 999, category: createdCats['t-shirts']._id, categoryName: 'T-Shirts',
-                meeshoLink: 'https://www.meesho.com/polo-tshirt/p/2',
-                isFeatured: true, isTrending: false, badge: 'New', rating: 4.6, order: 2,
-                images: ['https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500'],
-                tags: ['polo', 'classic', 'cotton', 'tshirt']
-            },
-            {
-                name: 'Acid Wash Round Neck Tee', description: 'Trendy acid-wash round neck t-shirt with vintage fade effect – a must-have for streetwear lovers',
-                price: 349, originalPrice: 699, category: createdCats['t-shirts']._id, categoryName: 'T-Shirts',
-                meeshoLink: 'https://www.meesho.com/acid-wash-tee/p/3',
-                isFeatured: false, isTrending: true, badge: 'Sale', rating: 4.4, order: 3,
-                images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500'],
-                tags: ['acid wash', 'vintage', 'round neck', 'tshirt']
-            },
-            {
-                name: 'Striped Henley Tee', description: 'Classic striped Henley t-shirt in breathable cotton, perfect for summer outings',
-                price: 449, originalPrice: 899, category: createdCats['t-shirts']._id, categoryName: 'T-Shirts',
-                meeshoLink: 'https://www.meesho.com/striped-henley-tee/p/4',
-                isFeatured: true, isTrending: true, badge: 'Trending', rating: 4.5, order: 4,
-                images: ['https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500'],
-                tags: ['striped', 'henley', 'summer', 'tshirt']
-            },
-
-            // Shirts
-            {
-                name: 'Slim Fit Formal Shirt', description: 'Crisp slim-fit formal shirt in premium wrinkle-free fabric, ideal for office and events',
-                price: 699, originalPrice: 1399, category: createdCats['shirts']._id, categoryName: 'Shirts',
-                meeshoLink: 'https://www.meesho.com/slim-fit-formal-shirt/p/5',
-                isFeatured: true, isTrending: false, badge: 'New', rating: 4.7, order: 1,
-                images: ['https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=500'],
-                tags: ['formal', 'slim fit', 'office', 'shirt']
-            },
-            {
-                name: 'Hawaiian Printed Shirt', description: 'Vibrant Hawaiian-print casual shirt for beach parties and weekend getaways',
-                price: 599, originalPrice: 1199, category: createdCats['shirts']._id, categoryName: 'Shirts',
-                meeshoLink: 'https://www.meesho.com/hawaiian-shirt/p/6',
-                isFeatured: true, isTrending: true, badge: 'Hot', rating: 4.8, order: 2,
-                images: ['https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500'],
-                tags: ['hawaiian', 'printed', 'casual', 'beach', 'shirt']
-            },
-            {
-                name: 'Denim Overshirt', description: 'Rugged denim overshirt that doubles as a jacket – layer it over any tee for instant style',
-                price: 899, originalPrice: 1799, category: createdCats['shirts']._id, categoryName: 'Shirts',
-                meeshoLink: 'https://www.meesho.com/denim-overshirt/p/7',
-                isFeatured: false, isTrending: true, badge: 'Trending', rating: 4.6, order: 3,
-                images: ['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500'],
-                tags: ['denim', 'overshirt', 'layering', 'jacket']
-            },
-            {
-                name: 'Linen Casual Shirt', description: 'Lightweight linen casual shirt – breathable and comfortable for summer and travel',
-                price: 749, originalPrice: 1499, category: createdCats['shirts']._id, categoryName: 'Shirts',
-                meeshoLink: 'https://www.meesho.com/linen-casual-shirt/p/8',
-                isFeatured: true, isTrending: false, badge: '', rating: 4.5, order: 4,
-                images: ['https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?w=500'],
-                tags: ['linen', 'casual', 'summer', 'travel']
-            },
-
-            // Accessories
-            {
-                name: 'Leather Bifold Wallet', description: 'Premium genuine leather bifold wallet with multiple card slots and RFID protection',
-                price: 499, originalPrice: 999, category: createdCats['accessories']._id, categoryName: 'Accessories',
-                meeshoLink: 'https://www.meesho.com/leather-wallet/p/9',
-                isFeatured: true, isTrending: true, badge: 'Hot', rating: 4.9, order: 1,
-                images: ['https://images.unsplash.com/photo-1627123424574-724758594e93?w=500'],
-                tags: ['wallet', 'leather', 'rfid', 'accessory']
-            },
-            {
-                name: 'Stainless Steel Watch', description: 'Elegant stainless steel chronograph watch with mineral crystal glass – a timeless accessory',
-                price: 1299, originalPrice: 2599, category: createdCats['accessories']._id, categoryName: 'Accessories',
-                meeshoLink: 'https://www.meesho.com/steel-watch/p/10',
-                isFeatured: true, isTrending: true, badge: 'Premium', rating: 4.8, order: 2,
-                images: ['https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500'],
-                tags: ['watch', 'steel', 'chronograph', 'accessory']
-            },
-            {
-                name: 'Canvas Messenger Bag', description: 'Rugged canvas messenger bag with laptop compartment and multiple pockets, great for daily use',
-                price: 799, originalPrice: 1599, category: createdCats['accessories']._id, categoryName: 'Accessories',
-                meeshoLink: 'https://www.meesho.com/messenger-bag/p/11',
-                isFeatured: false, isTrending: true, badge: 'New', rating: 4.6, order: 3,
-                images: ['https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500'],
-                tags: ['bag', 'messenger', 'canvas', 'laptop']
-            },
-            {
-                name: 'Aviator Sunglasses', description: 'Classic gold-frame aviator sunglasses with polarized UV400 lenses – iconic and effortlessly cool',
-                price: 399, originalPrice: 799, category: createdCats['accessories']._id, categoryName: 'Accessories',
-                meeshoLink: 'https://www.meesho.com/aviator-sunglasses/p/12',
-                isFeatured: true, isTrending: false, badge: 'Sale', rating: 4.5, order: 4,
-                images: ['https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500'],
-                tags: ['sunglasses', 'aviator', 'polarized', 'uv400']
-            },
-
-            // Footwear
-            {
-                name: 'Chunky Sole Sneakers', description: 'Bold chunky-sole sneakers in clean white with triple layered soles – make a statement wherever you go',
-                price: 1099, originalPrice: 2199, category: createdCats['footwear']._id, categoryName: 'Footwear',
-                meeshoLink: 'https://www.meesho.com/chunky-sneakers/p/13',
-                isFeatured: true, isTrending: true, badge: 'Hot', rating: 4.8, order: 1,
-                images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500'],
-                tags: ['sneakers', 'chunky', 'streetwear', 'footwear']
-            },
-            {
-                name: 'Leather Derby Shoes', description: 'Classic genuine leather derby shoes with rubber sole – perfect for formal and semi-formal occasions',
-                price: 1299, originalPrice: 2599, category: createdCats['footwear']._id, categoryName: 'Footwear',
-                meeshoLink: 'https://www.meesho.com/derby-shoes/p/14',
+                name: 'Pro-Grip Carbon Riding Gloves', description: 'Touch-sensitive carbon fiber knuckles riding gloves for maximum protection and comfort',
+                price: 850, originalPrice: 1500, category: createdCats['riding-gloves']._id, categoryName: 'Riding Gloves',
+                meeshoLink: 'https://www.meesho.com/gloves/p/2',
                 isFeatured: true, isTrending: false, badge: 'Premium', rating: 4.7, order: 2,
-                images: ['https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=500'],
-                tags: ['derby', 'leather', 'formal', 'shoes']
-            },
-            {
-                name: 'Slip-On Canvas Shoes', description: 'Lightweight slip-on canvas shoes with memory foam insoles – all-day comfort in style',
-                price: 699, originalPrice: 1399, category: createdCats['footwear']._id, categoryName: 'Footwear',
-                meeshoLink: 'https://www.meesho.com/slipon-canvas/p/15',
-                isFeatured: false, isTrending: true, badge: 'New', rating: 4.5, order: 3,
-                images: ['https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=500'],
-                tags: ['canvas', 'slip-on', 'casual', 'comfort']
-            },
+                images: ['https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?w=800'],
+                tags: ['gloves', 'protection', 'leather']
+            }
         ];
 
         await Product.insertMany(products);
-
-        // Mark as seeded so they don't reappear if deleted
         await Settings.findByIdAndUpdate(settings._id, { hasSeeded: true });
 
-        console.log(`✅ ${products.length} Alpha Strix sample products seeded`);
+        console.log(`✅ ${products.length} 2waad sample products seeded`);
     } catch (err) {
         console.error('Products seed error:', err);
     }

@@ -29,7 +29,7 @@ app.use('/api/settings', require('./routes/settings'));
 
 // Health check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', message: 'Alpha Strix API is running' });
+    res.json({ status: 'ok', message: '2waad API is running' });
 });
 
 // MongoDB Connection
@@ -46,5 +46,5 @@ mongoose.connect(process.env.MONGO_URI)
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
-    console.log(`🚀 Alpha Strix server running on port ${PORT}`);
+    console.log(`🚀 2waad server running on port ${PORT}`);
 });

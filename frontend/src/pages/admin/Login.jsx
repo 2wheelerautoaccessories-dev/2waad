@@ -29,10 +29,10 @@ const Login = () => {
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                        <img src="/logo.png" alt="Alpha Strix" className="w-full h-full object-contain brightness-110 drop-shadow-[0_0_10px_rgba(192,192,192,0.3)]" />
+                        <img src="/logo.png" alt="2waad" className="w-full h-full object-contain brightness-110 drop-shadow-[0_0_10px_rgba(192,192,192,0.3)]" />
                     </div>
-                    <h1 className="font-heading text-4xl font-extrabold text-gold uppercase tracking-[0.2em]">Alpha Strix</h1>
-                    <p className="text-slate text-xs mt-2 uppercase tracking-[0.4em] opacity-70 font-medium">The Alpha Collection</p>
+                    <h1 className="font-heading text-4xl font-extrabold text-gold uppercase tracking-[0.2em]">2waad</h1>
+                    <p className="text-slate text-xs mt-2 uppercase tracking-[0.4em] opacity-70 font-medium">Auto Accessories Den</p>
                 </div>
 
                 <div className="bg-steel rounded-2xl p-8 border border-gold/20 shadow-2xl">
@@ -46,7 +46,7 @@ const Login = () => {
                                 value={formData.email}
                                 onChange={e => setFormData({ ...formData, email: e.target.value })}
                                 className="w-full bg-navy border border-gold/20 focus:border-gold rounded-xl px-4 py-3 text-offwhite placeholder-slate outline-none focus:ring-1 focus:ring-gold transition-colors"
-                                placeholder="admin@alphastrix.in"
+                                placeholder="admin@2waad.com"
                             />
                         </div>
                         <div>

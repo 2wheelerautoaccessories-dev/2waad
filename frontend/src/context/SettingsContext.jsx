@@ -5,14 +5,14 @@ import API from '../utils/api';
 // Footer, FloatingWhatsApp, About, Contact all use this — zero duplicate API calls
 const SettingsContext = createContext({
     whatsappNumber: '',
-    email: 'contact@alphastrix.in',
+    email: 'contact@2waad.com',
     address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
 });
 
 export const SettingsProvider = ({ children }) => {
     const [settings, setSettings] = useState({
         whatsappNumber: '',
-        email: 'contact@alphastrix.in',
+        email: 'contact@2waad.com',
         address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
     });
 

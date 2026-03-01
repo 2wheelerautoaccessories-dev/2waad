@@ -4,8 +4,6 @@ import { ShoppingBag, ArrowRight, Shield, Zap, Star } from 'lucide-react';
 import API, { getImageUrl } from '../utils/api';
 import ProductCard from '../components/ProductCard';
 
-
-
 const SkeletonCard = () => (
     <div className="animate-pulse bg-steel rounded-xl overflow-hidden border border-gold/10">
         <div className="aspect-[4/5] bg-navy/40"></div>
@@ -51,35 +49,34 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1593032465175-481ac7f401a0?q=80&w=1920&auto=format&fit=crop"
-                        alt="Alpha Strix Signature Collection"
+                        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920&auto=format&fit=crop"
+                        alt="2waad Two Wheeler Accessories"
                         className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
                         loading="eager"
                     />
-                    {/* Balanced overlays for visibility and readability */}
-                    <div className="absolute inset-0 bg-navy/40"></div>
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' }}></div>
+                    <div className="absolute inset-0 bg-navy/50"></div>
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.25) 60%, transparent 100%)' }}></div>
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div className="max-w-2xl animate-slide-up">
                         <span className="block text-gold font-heading font-semibold tracking-[0.4em] uppercase mb-4 text-sm">
-                            New Collection
+                            New Arrivals
                         </span>
                         <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold font-heading mb-6 leading-none text-offwhite">
-                            DRESS <br />
+                            RIDE <br />
                             <span className="text-gold">BOLD.</span> <br />
-                            BE ALPHA.
+                            RIDE SAFE.
                         </h1>
                         <p className="text-base sm:text-lg text-slate mb-8 max-w-xl leading-relaxed">
-                            Discover our curated collection of premium men's fashion — from streetwear to formal, accessories to footwear. Elevate your style game.
+                            Discover premium two-wheeler accessories — from helmets and riding gear to lights, mirrors, and more. Gear up for every ride.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link to="/shop" className="btn-primary">
-                                Shop Collection <ShoppingBag size={18} />
+                                Shop Accessories <ShoppingBag size={18} />
                             </Link>
-                            <Link to="/category/accessories" className="btn-secondary">
-                                Accessories
+                            <Link to="/category/helmets" className="btn-secondary">
+                                Helmets
                             </Link>
                         </div>
                     </div>
@@ -99,29 +96,28 @@ const Home = () => {
                             <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-64 sm:h-96 rounded-2xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-all duration-500 shadow-2xl">
                                 {(() => {
                                     const catImages = {
-                                        'T-Shirts': 'https://images.unsplash.com/photo-1562157873-818bc0726f68?q=80&w=1000',
-                                        'Shirts': 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=1000',
-                                        'Suits': 'https://images.unsplash.com/photo-1593032465175-481ac7f401a0?q=80&w=1000',
-                                        'Blazers': 'https://images.unsplash.com/photo-1555069519-127aadedf1ee?q=80&w=1000',
-                                        'Trousers': 'https://images.unsplash.com/photo-1624371414361-e6e0efc5831f?q=80&w=1000',
-                                        'Jeans': 'https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1000',
-                                        'Shorts': 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=1000',
-                                        'Hoodies': 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1000',
-                                        'Gym Wear': 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000',
-                                        'Innerwear': 'https://images.unsplash.com/photo-1590483736622-39da8af75bba?q=80&w=1000',
-                                        'Accessories': 'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000',
-                                        'Footwear': 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000'
+                                        'Helmets': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1000',
+                                        'Riding Gloves': 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=1000',
+                                        'Riding Jackets': 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?q=80&w=1000',
+                                        'Bike Covers': 'https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=1000',
+                                        'Mirrors': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000',
+                                        'Lights & LEDs': 'https://images.unsplash.com/photo-1544919982-b61976f0ba43?q=80&w=1000',
+                                        'Grips & Handlebars': 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=1000',
+                                        'Locks & Security': 'https://images.unsplash.com/photo-1558618047-3d2e2d2a7d48?q=80&w=1000',
+                                        'Phone Mounts': 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?q=80&w=1000',
+                                        'Luggage & Bags': 'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=1000',
+                                        'Cleaning & Care': 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=1000',
+                                        'Stickers & Decals': 'https://images.unsplash.com/photo-1558980395-be9a5e7e2e9a?q=80&w=1000',
                                     };
                                     return (
                                         <img
-                                            src={catImages[cat.name] || getImageUrl(cat.image) || 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1000'}
+                                            src={catImages[cat.name] || getImageUrl(cat.image) || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1000'}
                                             alt={cat.name}
                                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                                             loading="lazy"
                                         />
                                     );
                                 })()}
-                                {/* Subtle gradient for text readability without blurring the image */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
 
                                 <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
@@ -146,7 +142,7 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-end mb-12">
                         <div>
-                            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-offwhite">Featured Collection</h2>
+                            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-offwhite">Featured Products</h2>
                             <div className="w-16 h-1 bg-gold rounded-full"></div>
                         </div>
                         <Link to="/shop" className="text-gold hover:text-gold-lt font-semibold hidden md:flex items-center gap-2 transition-colors font-heading uppercase tracking-wider text-sm">
@@ -210,21 +206,21 @@ const Home = () => {
                                 <Star size={32} />
                             </div>
                             <h3 className="text-xl font-heading font-bold mb-3 text-gold uppercase tracking-wider">Premium Quality</h3>
-                            <p className="text-slate text-sm">Handpicked collections crafted with the finest materials and immense attention to detail.</p>
+                            <p className="text-slate text-sm">Handpicked accessories built to last — only the best gear for serious riders.</p>
                         </div>
                         <div className="bg-steel/50 p-8 rounded-xl border border-gold/10 hover:border-gold/30 transition-colors">
                             <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mx-auto mb-6 text-gold border border-gold/30">
                                 <Shield size={32} />
                             </div>
                             <h3 className="text-xl font-heading font-bold mb-3 text-gold uppercase tracking-wider">Secure Buying</h3>
-                            <p className="text-slate text-sm">Shop securely through our certified Meesho affiliate links with complete buyer protection.</p>
+                            <p className="text-slate text-sm">Shop securely through our certified affiliate links with complete buyer protection.</p>
                         </div>
                         <div className="bg-steel/50 p-8 rounded-xl border border-gold/10 hover:border-gold/30 transition-colors">
                             <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mx-auto mb-6 text-gold border border-gold/30">
                                 <Zap size={32} />
                             </div>
                             <h3 className="text-xl font-heading font-bold mb-3 text-gold uppercase tracking-wider">100% Authentic</h3>
-                            <p className="text-slate text-sm">Only the highest-rated authentic products curated to ensure your complete satisfaction.</p>
+                            <p className="text-slate text-sm">Only genuine, highest-rated products curated to ensure your complete riding satisfaction.</p>
                         </div>
                     </div>
                 </div>

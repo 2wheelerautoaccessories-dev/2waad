@@ -7,7 +7,7 @@ module.exports = async function seedAdmin() {
         const existing = await Admin.findOne({ email: adminEmail });
         if (!existing) {
             const hashed = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'admin123', 12);
-            await Admin.create({ email: adminEmail, password: hashed, name: 'Alpha Strix Admin' });
+            await Admin.create({ email: adminEmail, password: hashed, name: '2waad Admin' });
             console.log('✅ Admin user seeded');
         }
     } catch (err) {

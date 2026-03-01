@@ -5,7 +5,6 @@ import { useSettings } from '../context/SettingsContext';
 const Footer = () => {
     const settings = useSettings();
 
-
     return (
         <footer className="bg-charcoal pt-16 pb-8 border-t border-gold/20 mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,32 +16,32 @@ const Footer = () => {
                             <div className="w-12 h-12 flex items-center justify-center">
                                 <img
                                     src="/logo.png"
-                                    alt="Alpha Strix"
+                                    alt="2waad"
                                     className="w-full h-full object-contain brightness-110 drop-shadow-[0_0_5px_rgba(192,192,192,0.2)]"
                                 />
                             </div>
                             <div className="flex flex-col -space-y-1">
                                 <span className="font-heading text-xl font-extrabold text-gold tracking-widest uppercase">
-                                    Alpha Strix
+                                    2waad
                                 </span>
                                 <span className="text-[8px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
-                                    The Alpha Collection
+                                    Two Wheeler Auto Accessories Den
                                 </span>
                             </div>
                         </Link>
                         <p className="text-slate text-sm leading-relaxed">
-                            Discover our curated collection of premium men's fashion, accessories, and footwear designed for the bold and modern man.
+                            Your one-stop destination for premium two-wheeler accessories — helmets, riding gear, lights, grips, and everything your ride needs.
                         </p>
                         <div className="flex space-x-4 pt-2">
-                            <a href="https://www.instagram.com/alphastrix.in/" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.instagram.com/2waad.in/" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Instagram size={18} />
                             </a>
-                            <a href="https://www.facebook.com/profile.php?id=61588591273834" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.facebook.com/2waad" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Facebook size={18} />
                             </a>
-                            <a href="https://www.youtube.com/channel/UCJFRUzFvOXrpZGIbwVpmYAg" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.youtube.com/@2waad" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Youtube size={18} />
                             </a>
@@ -63,10 +62,10 @@ const Footer = () => {
                     <div>
                         <h3 className="font-heading font-bold text-lg mb-4 text-gold tracking-wider uppercase">Categories</h3>
                         <ul className="space-y-3">
-                            <li><Link to="/category/t-shirts" className="text-slate hover:text-gold text-sm transition-colors">T-Shirts</Link></li>
-                            <li><Link to="/category/shirts" className="text-slate hover:text-gold text-sm transition-colors">Shirts</Link></li>
-                            <li><Link to="/category/accessories" className="text-slate hover:text-gold text-sm transition-colors">Accessories</Link></li>
-                            <li><Link to="/category/footwear" className="text-slate hover:text-gold text-sm transition-colors">Footwear</Link></li>
+                            <li><Link to="/category/helmets" className="text-slate hover:text-gold text-sm transition-colors">Helmets</Link></li>
+                            <li><Link to="/category/riding-jackets" className="text-slate hover:text-gold text-sm transition-colors">Riding Jackets</Link></li>
+                            <li><Link to="/category/lights-leds" className="text-slate hover:text-gold text-sm transition-colors">Lights & LEDs</Link></li>
+                            <li><Link to="/category/phone-mounts" className="text-slate hover:text-gold text-sm transition-colors">Phone Mounts</Link></li>
                         </ul>
                     </div>
 
@@ -93,7 +92,7 @@ const Footer = () => {
 
                 <div className="border-t border-gold/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-sm text-slate">
-                        &copy; {new Date().getFullYear()} Alpha Strix. All rights reserved.
+                        &copy; {new Date().getFullYear()} 2waad. All rights reserved. | <span className="text-gold/70">2waad.com</span>
                     </p>
                     <div className="flex gap-4 text-sm text-slate">
                         <Link to="#" className="hover:text-gold transition-colors">Privacy Policy</Link>

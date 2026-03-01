@@ -1,7 +1,7 @@
 {
-    "name": "alphastrix-backend",
+    "name": "2waad-backend",
     "version": "1.0.0",
-    "description": "Alpha Strix - Backend API server for Men's Fashion",
+    "description": "2waad - Backend API server for two-wheeler accessories",
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
