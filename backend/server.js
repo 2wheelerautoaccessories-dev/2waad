@@ -32,50 +32,6 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: '2waad API is running' });
 });
 
-// ONE-TIME: Seed categories + WhatsApp setting
-app.get('/api/seed-2waad-data', async (req, res) => {
-    try {
-        const Category = require('./models/Category');
-        const Settings = require('./models/Settings');
-
-        const cats = [
-            { name: 'Helmets', slug: 'helmets', order: 1 },
-            { name: 'Riding Gloves', slug: 'riding-gloves', order: 2 },
-            { name: 'Riding Jackets', slug: 'riding-jackets', order: 3 },
-            { name: 'Bike Covers', slug: 'bike-covers', order: 4 },
-            { name: 'Mirrors', slug: 'mirrors', order: 5 },
-            { name: 'Lights & LEDs', slug: 'lights-leds', order: 6 },
-            { name: 'Grips & Handlebars', slug: 'grips-handlebars', order: 7 },
-            { name: 'Locks & Security', slug: 'locks-security', order: 8 },
-            { name: 'Phone Mounts', slug: 'phone-mounts', order: 9 },
-            { name: 'Luggage & Bags', slug: 'luggage-bags', order: 10 },
-            { name: 'Cleaning & Care', slug: 'cleaning-care', order: 11 },
-            { name: 'Stickers & Decals', slug: 'stickers-decals', order: 12 },
-        ];
-
-        let created = 0;
-        for (const cat of cats) {
-            const exists = await Category.findOne({ slug: cat.slug });
-            if (!exists) { await Category.create(cat); created++; }
-        }
-
-        // Seed settings with WhatsApp number
-        let settings = await Settings.findOne();
-        if (!settings) {
-            await Settings.create({
-                whatsappNumber: '+919876543210',
-                email: 'contact@2waad.com',
-                address: 'Tarnaka, Hyderabad,\nTelangana, 500007'
-            });
-        }
-
-        const total = await Category.countDocuments();
-        res.json({ success: true, created, total, message: 'Remove this endpoint after use.' });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
     .then(async () => {
@@ -83,8 +39,6 @@ mongoose.connect(process.env.MONGO_URI)
 
         // Seed admin user if not exists
         await require('./utils/seedAdmin')();
-        // Removed to permanently prevent old sample products from reappearing
-        // await require('./utils/seedProducts')();
     })
     .catch(err => console.error('❌ MongoDB connection error:', err));
 
