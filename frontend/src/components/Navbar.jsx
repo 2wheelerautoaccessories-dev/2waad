@@ -42,22 +42,26 @@ const Navbar = () => {
     return (
         <nav className="bg-navy/95 backdrop-blur-md sticky top-0 z-50 border-b border-gold/20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-20">
+                <div className="flex justify-between items-center h-16 md:h-20">
 
-                    {/* Logo & Brand */}
-                    <Link to="/" className="flex items-center flex-shrink-0 gap-4 group">
-                        <div className="relative w-12 h-12 flex items-center justify-center">
+                    {/* Logo & Brand — min-w-0 lets it shrink without pushing burger */}
+                    <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 flex-shrink-1 mr-2">
+                        <div className="relative w-9 h-9 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center">
                             <img
                                 src="/logo.png"
                                 alt="2waad Logo"
                                 className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_0_8px_rgba(192,192,192,0.3)] group-hover:drop-shadow-[0_0_12px_rgba(192,192,192,0.5)] transition-all duration-300"
                             />
                         </div>
-                        <div className="flex flex-col -space-y-1">
-                            <span className="font-heading text-2xl font-extrabold text-gold tracking-widest uppercase transition-all duration-300 group-hover:text-offwhite group-hover:tracking-[0.15em]">
+                        <div className="flex flex-col -space-y-0.5 min-w-0">
+                            <span className="font-heading text-lg md:text-2xl font-extrabold text-gold tracking-widest uppercase transition-all duration-300 group-hover:text-offwhite leading-none">
                                 2waad
                             </span>
-                            <span className="text-[10px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
+                            {/* Hidden on very small screens, abbreviated on sm, full on md+ */}
+                            <span className="hidden sm:block md:hidden text-[8px] text-slate font-medium tracking-[0.2em] uppercase opacity-70 truncate">
+                                Two Wheeler Accessories
+                            </span>
+                            <span className="hidden md:block text-[10px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
                                 Two Wheeler Auto Accessories Den
                             </span>
                         </div>
@@ -107,17 +111,19 @@ const Navbar = () => {
                         <Link to="/about" className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest">About</Link>
                     </div>
 
-                    {/* Mobile menu button */}
-                    <div className="md:hidden flex items-center">
+                    {/* Mobile menu button — flex-shrink-0 so it never gets squeezed */}
+                    <div className="md:hidden flex-shrink-0 flex items-center">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-slate hover:text-gold transition-colors"
+                            className="text-slate hover:text-gold transition-colors p-1"
+                            aria-label="Toggle menu"
                         >
                             {isOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
                     </div>
                 </div>
             </div>
+
 
             {/* Mobile Menu */}
             <AnimatePresence>

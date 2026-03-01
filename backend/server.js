@@ -32,6 +32,22 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: '2waad API is running' });
 });
 
+// ONE-TIME ADMIN RESET — remove after use
+app.get('/api/reset-admin-2waad-secret', async (req, res) => {
+    try {
+        const bcrypt = require('bcryptjs');
+        const Admin = require('./models/Admin');
+        const email = (process.env.ADMIN_EMAIL || 'admin@2waad.com').toLowerCase();
+        const password = process.env.ADMIN_PASSWORD || 'admin123';
+        await Admin.deleteMany({});
+        const hashed = await bcrypt.hash(password, 12);
+        await Admin.create({ email, password: hashed, name: '2waad Admin' });
+        res.json({ success: true, message: 'Admin reset!', email, note: 'Remove this endpoint after use.' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
     .then(async () => {
