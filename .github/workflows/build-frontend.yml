@@ -1,0 +1,56 @@
+name: Build Frontend & Commit Dist
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/src/**'
+      - 'frontend/public/**'
+      - 'frontend/index.html'
+      - 'frontend/package.json'
+      - 'frontend/vite.config.js'
+      - 'frontend/tailwind.config.js'
+      - '.github/workflows/build-frontend.yml'
+
+  workflow_dispatch: # allow manual trigger from GitHub UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci --prefer-offline || npm install
+
+      - name: Create .env.production
+        working-directory: frontend
+        run: |
+          echo "VITE_API_URL=https://2waad-backend.onrender.com/api" > .env.production
+          echo "VITE_CLOUDINARY_CLOUD_NAME=dm0xxbz3s" >> .env.production
+          echo "VITE_CLOUDINARY_UPLOAD_PRESET=2waad_upload" >> .env.production
+
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Commit and push dist folder
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f frontend/dist
+          git status
+          git diff --cached --quiet || git commit -m "ci: auto-build dist [skip ci]"
+          git push
