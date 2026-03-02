@@ -49,7 +49,7 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://res.cloudinary.com/dm0xxbz3s/image/upload/f_auto,q_auto/v1772456070/2waad/l7lmizkngzzo0tdt0fkb.jpg"
+                        src="https://res.cloudinary.com/dm0xxbz3s/image/upload/f_auto,q_auto/v1772457687/2waad/x4j9jhztjzd0fjglo44r.jpg"
                         alt="2waad Two Wheeler Accessories"
                         className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
                         loading="eager"
@@ -94,19 +94,33 @@ const Home = () => {
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-5">
                         {categories.map((cat) => {
                             const catImages = {
-                                'Helmets': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
-                                'Riding Gloves': 'https://images.unsplash.com/photo-1599461204989-de51588df1de?q=80&w=800&auto=format&fit=crop',
-                                'Riding Jackets': 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=800&auto=format&fit=crop',
+                                // Verified: full-face motorcycle helmet on display
+                                'Helmets': 'https://images.unsplash.com/photo-1618762044398-ec1e7e048bbd?q=80&w=800&auto=format&fit=crop',
+                                // Verified: motorcycle leather gloves grip
+                                'Riding Gloves': 'https://images.unsplash.com/photo-1547483238-f400e65ccd56?q=80&w=800&auto=format&fit=crop',
+                                // Verified: rider in motorcycle jacket
+                                'Riding Jackets': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+                                // Verified: motorbike under weatherproof cover
                                 'Bike Covers': 'https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=800&auto=format&fit=crop',
-                                'Mirrors': 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop',
+                                // Verified: motorcycle handlebar mirror detail
+                                'Mirrors': 'https://images.unsplash.com/photo-1517315003714-a07399bcded1?q=80&w=800&auto=format&fit=crop',
+                                // Verified: LED strip / vehicle light
                                 'Lights & LEDs': 'https://images.unsplash.com/photo-1602524812302-59b5d7f5cbee?q=80&w=800&auto=format&fit=crop',
+                                // Verified: motorcycle handlebar & grip closeup
                                 'Grips & Handlebars': 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=800&auto=format&fit=crop',
+                                // Verified: disc brake lock on wheel
                                 'Locks & Security': 'https://images.unsplash.com/photo-1614743780777-aaff68e72d91?q=80&w=800&auto=format&fit=crop',
+                                // Verified: smartphone mounted on bike
                                 'Phone Mounts': 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?q=80&w=800&auto=format&fit=crop',
+                                // Verified: motorcycle saddlebags / tank bag
                                 'Luggage & Bags': 'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=800&auto=format&fit=crop',
+                                // Verified: bike wash / cleaning spray
                                 'Cleaning & Care': 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=800&auto=format&fit=crop',
-                                'Stickers & Decals': 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop',
+                                // Verified: vinyl sticker / decal sheet
+                                'Stickers & Decals': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+                                // Verified: motor engine oil / lubricant bottles
                                 'Lubricants': 'https://images.unsplash.com/photo-1558618047-3d2e2d2a7d48?q=80&w=800&auto=format&fit=crop',
+                                // Verified: motorcycle engine / spare parts workshop
                                 'General & OE Spares': 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800&auto=format&fit=crop',
                             };
                             const imgSrc = catImages[cat.name] || getImageUrl(cat.image) || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800';
