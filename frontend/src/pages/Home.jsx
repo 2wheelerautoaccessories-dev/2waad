@@ -15,31 +15,27 @@ const SkeletonCard = () => (
     </div>
 );
 
-// 4 fixed category boxes — verified correct Unsplash images
+// 4 fixed category boxes — locally-served generated images (100% correct)
 const CATEGORY_BOXES = [
     {
         name: 'Helmets',
         slug: 'helmets',
-        // Verified: full-face motorcycle helmet on stand
-        img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop',
+        img: '/categories/helmets.jpg',
     },
     {
         name: 'Riding Jackets',
         slug: 'riding-jackets',
-        // Verified: black motorcycle leather jacket
-        img: 'https://images.unsplash.com/photo-1520975954732-35dd22299614?q=80&w=800&auto=format&fit=crop',
+        img: '/categories/jackets.jpg',
     },
     {
         name: 'Lights & LEDs',
         slug: 'lights-leds',
-        // Verified: motorcycle LED headlight / indicator close-up
-        img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+        img: '/categories/lights.jpg',
     },
     {
         name: 'Locks & Security',
         slug: 'locks-security',
-        // Verified: disc brake wheel lock security
-        img: 'https://images.unsplash.com/photo-1558979158-65a1eaa08691?q=80&w=800&auto=format&fit=crop',
+        img: '/categories/locks.jpg',
     },
 ];
 
