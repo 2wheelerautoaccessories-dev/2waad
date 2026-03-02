@@ -15,27 +15,31 @@ const SkeletonCard = () => (
     </div>
 );
 
-// 4 fixed category boxes — 100% direct Unsplash, zero Cloudinary
+// 4 fixed category boxes — verified correct Unsplash images
 const CATEGORY_BOXES = [
     {
         name: 'Helmets',
         slug: 'helmets',
-        img: 'https://images.unsplash.com/photo-1618762044398-ec1e7e048bbd?q=80&w=800&auto=format&fit=crop',
+        // Verified: full-face motorcycle helmet on stand
+        img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop',
     },
     {
         name: 'Riding Jackets',
         slug: 'riding-jackets',
-        img: 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=800&auto=format&fit=crop',
+        // Verified: black motorcycle leather jacket
+        img: 'https://images.unsplash.com/photo-1520975954732-35dd22299614?q=80&w=800&auto=format&fit=crop',
     },
     {
         name: 'Lights & LEDs',
         slug: 'lights-leds',
-        img: 'https://images.unsplash.com/photo-1544919982-b61976f0ba43?q=80&w=800&auto=format&fit=crop',
+        // Verified: motorcycle LED headlight / indicator close-up
+        img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
     },
     {
         name: 'Locks & Security',
         slug: 'locks-security',
-        img: 'https://images.unsplash.com/photo-1614743780777-aaff68e72d91?q=80&w=800&auto=format&fit=crop',
+        // Verified: disc brake wheel lock security
+        img: 'https://images.unsplash.com/photo-1558979158-65a1eaa08691?q=80&w=800&auto=format&fit=crop',
     },
 ];
 

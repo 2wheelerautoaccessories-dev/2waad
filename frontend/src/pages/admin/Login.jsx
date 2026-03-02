@@ -32,7 +32,8 @@ const Login = () => {
                         <img
                             src="/logo.png"
                             alt="2WAAD"
-                            className="h-full w-auto object-contain drop-shadow-[0_0_12px_rgba(192,192,192,0.4)]"
+                            className="h-full w-auto object-contain"
+                            style={{ mixBlendMode: 'screen' }}
                         />
                     </div>
                     <p className="text-slate text-xs uppercase tracking-[0.4em] opacity-70 font-medium">Admin Portal</p>

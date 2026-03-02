@@ -240,7 +240,7 @@ const Dashboard = () => {
                 {/* Sidebar brand — wide logo */}
                 <div className="h-20 flex items-center px-4 border-b border-gold/20">
                     <div className="h-10 w-40 flex items-center justify-start overflow-hidden">
-                        <img src="/logo.png" alt="2WAAD" className="h-full w-auto object-contain brightness-110" />
+                        <img src="/logo.png" alt="2WAAD" className="h-full w-auto object-contain brightness-110" style={{ mixBlendMode: 'screen' }} />
                     </div>
                 </div>
 
@@ -271,7 +271,7 @@ const Dashboard = () => {
                 {/* Mobile header — wide logo */}
                 <div className="md:hidden h-16 bg-charcoal border-b border-gold/20 flex items-center justify-between px-4">
                     <div className="h-9 w-36 flex items-center justify-start overflow-hidden">
-                        <img src="/logo.png" alt="2WAAD" className="h-full w-auto object-contain brightness-110" />
+                        <img src="/logo.png" alt="2WAAD" className="h-full w-auto object-contain brightness-110" style={{ mixBlendMode: 'screen' }} />
                     </div>
                     <button onClick={handleLogout} className="text-red-400"><LogOut size={20} /></button>
                 </div>

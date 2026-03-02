@@ -54,12 +54,13 @@ const Navbar = () => {
                         className="flex items-center group flex-1 min-w-0"
                         onClick={() => setIsOpen(false)}
                     >
-                        {/* Logo — wide rectangular, shows 2WAAD text inside */}
-                        <div className="flex-shrink-0 h-10 md:h-12 w-36 md:w-44 flex items-center justify-start overflow-hidden">
+                        {/* Logo — wide, transparent on dark bg */}
+                        <div className="flex-shrink-0 h-10 md:h-12 w-36 md:w-44 flex items-center justify-start">
                             <img
                                 src="/logo.png"
                                 alt="2WAAD Logo"
                                 className="h-full w-auto object-contain group-hover:brightness-125 transition-all duration-300"
+                                style={{ mixBlendMode: 'screen' }}
                             />
                         </div>
                     </Link>

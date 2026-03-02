@@ -12,14 +12,13 @@ const Footer = () => {
 
                     {/* Brand */}
                     <div className="space-y-4">
-                        <Link to="/" className="flex items-center mb-2 group">
-                            <div className="h-12 w-44 flex items-center justify-start overflow-hidden">
-                                <img
-                                    src="/logo.png"
-                                    alt="2WAAD"
-                                    className="h-full w-auto object-contain group-hover:brightness-125 transition-all duration-300"
-                                />
-                            </div>
+                        <Link to="/" className="inline-flex mb-3 group">
+                            <img
+                                src="/logo.png"
+                                alt="2WAAD"
+                                className="h-14 w-auto object-contain group-hover:brightness-125 transition-all duration-300"
+                                style={{ mixBlendMode: 'screen' }}
+                            />
                         </Link>
                         <p className="text-slate text-sm leading-relaxed">
                             Your one-stop destination for premium two-wheeler accessories — helmets, riding gear, lights, grips, and everything your ride needs.
