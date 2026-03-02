@@ -198,11 +198,12 @@ const Dashboard = () => {
                 const cloudinaryUrl = await uploadToCloudinary(compressed);
 
                 if (cloudinaryUrl) {
-                    // Send as JSON string for images array
                     submitData.append('images', JSON.stringify([cloudinaryUrl]));
                 } else {
-                    // Fallback to local upload
-                    submitData.append('images', selectedImage);
+                    // ❌ CLOUDINARY REQUIRED — do not fall back to local storage
+                    toast.error('Image upload to Cloudinary failed. Please try again or check your connection.');
+                    toast.dismiss('upload');
+                    return; // Block submission — no local fallback
                 }
                 toast.dismiss('upload');
             } else if (editingProduct) {
@@ -236,11 +237,11 @@ const Dashboard = () => {
         <div className="min-h-screen bg-navy flex flex-col md:flex-row">
             {/* Sidebar */}
             <aside className="w-full md:w-64 bg-charcoal border-r border-gold/20 flex-col hidden md:flex">
-                <div className="h-20 flex items-center px-6 border-b border-gold/20 gap-4">
-                    <div className="w-10 h-10 flex items-center justify-center">
-                        <img src="/logo.png" alt="Logo" className="w-full h-full object-contain brightness-110" />
+                {/* Sidebar brand — wide logo */}
+                <div className="h-20 flex items-center px-4 border-b border-gold/20">
+                    <div className="h-10 w-40 flex items-center justify-start overflow-hidden">
+                        <img src="/logo.png" alt="2WAAD" className="h-full w-auto object-contain brightness-110" />
                     </div>
-                    <span className="font-heading text-xl font-bold text-gold tracking-widest uppercase">2waad</span>
                 </div>
 
                 <nav className="flex-1 py-6 px-4 space-y-2">
@@ -267,13 +268,10 @@ const Dashboard = () => {
 
             {/* Main Content */}
             <main className="flex-1 flex flex-col h-screen overflow-hidden">
-                {/* Mobile header */}
+                {/* Mobile header — wide logo */}
                 <div className="md:hidden h-16 bg-charcoal border-b border-gold/20 flex items-center justify-between px-4">
-                    <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 flex items-center justify-center">
-                            <img src="/logo.png" alt="Logo" className="w-full h-full object-contain brightness-110" />
-                        </div>
-                        <span className="font-heading text-lg font-bold text-gold uppercase tracking-widest">2waad</span>
+                    <div className="h-9 w-36 flex items-center justify-start overflow-hidden">
+                        <img src="/logo.png" alt="2WAAD" className="h-full w-auto object-contain brightness-110" />
                     </div>
                     <button onClick={handleLogout} className="text-red-400"><LogOut size={20} /></button>
                 </div>
