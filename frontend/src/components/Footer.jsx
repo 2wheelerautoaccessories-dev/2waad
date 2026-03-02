@@ -24,15 +24,15 @@ const Footer = () => {
                             Your one-stop destination for premium two-wheeler accessories — helmets, riding gear, lights, grips, and everything your ride needs.
                         </p>
                         <div className="flex space-x-4 pt-2">
-                            <a href="https://www.instagram.com/2waad.in/" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.instagram.com/2wheelerautoacceries" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Instagram size={18} />
                             </a>
-                            <a href="https://www.facebook.com/2waad" target="_blank" rel="noopener noreferrer"
+                            <a href="https://www.facebook.com/profile.php?id=61568180296997" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Facebook size={18} />
                             </a>
-                            <a href="https://www.youtube.com/@2waad" target="_blank" rel="noopener noreferrer"
+                            <a href="https://youtube.com/@2waadyt?si=cK3nMtySI4RzUCV5" target="_blank" rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-lg bg-steel flex items-center justify-center text-gold hover:bg-gold hover:text-navy transition-all">
                                 <Youtube size={18} />
                             </a>

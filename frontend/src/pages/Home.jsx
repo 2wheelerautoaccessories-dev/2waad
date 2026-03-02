@@ -74,7 +74,7 @@ const Home = () => {
                     <img
                         src="/hero.png"
                         alt="2waad Two Wheeler Accessories — Premium Bike Garage"
-                        className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
+                        className="w-full h-full object-cover object-center"
                         loading="eager"
                     />
                     <div className="absolute inset-0 bg-navy/50"></div>
