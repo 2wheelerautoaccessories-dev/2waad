@@ -21,6 +21,8 @@ const Navbar = () => {
         { name: 'Luggage & Bags', path: '/category/luggage-bags' },
         { name: 'Cleaning & Care', path: '/category/cleaning-care' },
         { name: 'Stickers & Decals', path: '/category/stickers-decals' },
+        { name: 'Lubricants', path: '/category/lubricants' },
+        { name: 'General & OE Spares', path: '/category/general-oe-spares' },
     ];
 
     const navLinks = [

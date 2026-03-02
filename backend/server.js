@@ -32,6 +32,26 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: '2waad API is running' });
 });
 
+// ONE-TIME: Add 2 new categories
+app.get('/api/seed-new-cats', async (req, res) => {
+    try {
+        const Category = require('./models/Category');
+        const newCats = [
+            { name: 'Lubricants', slug: 'lubricants', order: 13 },
+            { name: 'General & OE Spares', slug: 'general-oe-spares', order: 14 },
+        ];
+        let created = 0;
+        for (const cat of newCats) {
+            const exists = await Category.findOne({ slug: cat.slug });
+            if (!exists) { await Category.create(cat); created++; }
+        }
+        const total = await Category.countDocuments();
+        res.json({ success: true, created, total });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
     .then(async () => {

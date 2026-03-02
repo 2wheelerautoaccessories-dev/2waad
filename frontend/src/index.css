@@ -3,21 +3,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── 2waad Grey Steel Colour Palette ── */
-  --color-navy: #1a1a1a;
-  /* Deep Charcoal background */
-  --color-steel: #2a2a2a;
-  /* Dark grey for cards/sections */
+  /* ── 2waad Midnight Noir Colour Palette ── */
+  --color-navy: #111111;
+  /* Primary Background — sophisticated deep grey */
+  --color-steel: #000000;
+  /* Surface Elevation — pure black cards that pop */
   --color-gold: #C0C0C0;
-  /* Metallic Silver for accents */
+  /* Signature Accent — metallic platinum silver */
   --color-gold-lt: #FFFFFF;
-  /* Pure White for hover states */
-  --color-slate: #9a9a9a;
-  /* Medium Grey for secondary text */
-  --color-offwhite: #F0F0F0;
-  /* Soft White for main text */
-  --color-charcoal: #111111;
-  /* Near Black for contrast sections */
+  /* Contrast White — hover states & vibrant accents */
+  --color-slate: #888888;
+  /* Secondary Text — readable muted grey */
+  --color-offwhite: #F5F5F5;
+  /* Primary Text — crisp off-white */
+  --color-charcoal: #0a0a0a;
+  /* Deep section contrast — near-absolute black */
 
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -52,6 +52,7 @@
     0% {
       transform: scale(1);
     }
+
     100% {
       transform: scale(1.1);
     }
@@ -92,7 +93,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    background-color: var(--color-steel);
+    background-color: var(--color-charcoal);
   }
 
   ::-webkit-scrollbar-thumb {
