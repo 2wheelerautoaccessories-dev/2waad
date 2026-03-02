@@ -49,7 +49,7 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920&auto=format&fit=crop"
+                        src="https://res.cloudinary.com/dm0xxbz3s/image/upload/f_auto,q_auto/v1772456070/2waad/l7lmizkngzzo0tdt0fkb.jpg"
                         alt="2waad Two Wheeler Accessories"
                         className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
                         loading="eager"
@@ -91,48 +91,48 @@ const Home = () => {
                         <div className="w-16 h-1 bg-gold mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                        {categories.slice(0, 4).map((cat, i) => (
-                            <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-64 sm:h-96 rounded-2xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-all duration-500 shadow-2xl">
-                                {(() => {
-                                    const catImages = {
-                                        'Helmets': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1000',
-                                        'Riding Gloves': 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=1000',
-                                        'Riding Jackets': 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?q=80&w=1000',
-                                        'Bike Covers': 'https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=1000',
-                                        'Mirrors': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1000',
-                                        'Lights & LEDs': 'https://images.unsplash.com/photo-1544919982-b61976f0ba43?q=80&w=1000',
-                                        'Grips & Handlebars': 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=1000',
-                                        'Locks & Security': 'https://images.unsplash.com/photo-1558618047-3d2e2d2a7d48?q=80&w=1000',
-                                        'Phone Mounts': 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?q=80&w=1000',
-                                        'Luggage & Bags': 'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=1000',
-                                        'Cleaning & Care': 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=1000',
-                                        'Stickers & Decals': 'https://images.unsplash.com/photo-1558980395-be9a5e7e2e9a?q=80&w=1000',
-                                    };
-                                    return (
-                                        <img
-                                            src={catImages[cat.name] || getImageUrl(cat.image) || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1000'}
-                                            alt={cat.name}
-                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                                            loading="lazy"
-                                        />
-                                    );
-                                })()}
-                                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
-
-                                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6">
-                                    <div className="flex justify-between items-end transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-                                        <div>
-                                            <p className="text-gold text-[10px] font-bold tracking-widest uppercase mb-1">Explore</p>
-                                            <h3 className="text-lg sm:text-3xl font-heading font-extrabold text-offwhite uppercase tracking-tighter leading-none">{cat.name}</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-5">
+                        {categories.map((cat) => {
+                            const catImages = {
+                                'Helmets': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800&auto=format&fit=crop',
+                                'Riding Gloves': 'https://images.unsplash.com/photo-1599461204989-de51588df1de?q=80&w=800&auto=format&fit=crop',
+                                'Riding Jackets': 'https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=800&auto=format&fit=crop',
+                                'Bike Covers': 'https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?q=80&w=800&auto=format&fit=crop',
+                                'Mirrors': 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop',
+                                'Lights & LEDs': 'https://images.unsplash.com/photo-1602524812302-59b5d7f5cbee?q=80&w=800&auto=format&fit=crop',
+                                'Grips & Handlebars': 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=800&auto=format&fit=crop',
+                                'Locks & Security': 'https://images.unsplash.com/photo-1614743780777-aaff68e72d91?q=80&w=800&auto=format&fit=crop',
+                                'Phone Mounts': 'https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?q=80&w=800&auto=format&fit=crop',
+                                'Luggage & Bags': 'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=800&auto=format&fit=crop',
+                                'Cleaning & Care': 'https://images.unsplash.com/photo-1607860108855-64acf2078ed9?q=80&w=800&auto=format&fit=crop',
+                                'Stickers & Decals': 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=800&auto=format&fit=crop',
+                                'Lubricants': 'https://images.unsplash.com/photo-1558618047-3d2e2d2a7d48?q=80&w=800&auto=format&fit=crop',
+                                'General & OE Spares': 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=800&auto=format&fit=crop',
+                            };
+                            const imgSrc = catImages[cat.name] || getImageUrl(cat.image) || 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=800';
+                            return (
+                                <Link key={cat._id} to={`/category/${cat.slug}`} className="group relative h-52 sm:h-72 rounded-2xl overflow-hidden block border border-gold/10 hover:border-gold/40 transition-all duration-500 shadow-2xl">
+                                    <img
+                                        src={imgSrc}
+                                        alt={cat.name}
+                                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500"></div>
+                                    <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-5">
+                                        <div className="flex justify-between items-end transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                                            <div className="min-w-0 flex-1 mr-2">
+                                                <p className="text-gold text-[9px] font-bold tracking-widest uppercase mb-1">Explore</p>
+                                                <h3 className="text-sm sm:text-xl font-heading font-extrabold text-offwhite uppercase tracking-tight leading-tight line-clamp-2">{cat.name}</h3>
+                                            </div>
+                                            <span className="flex-shrink-0 w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-gold flex items-center justify-center text-navy transform -rotate-45 group-hover:rotate-0 transition-all duration-500 shadow-xl">
+                                                <ArrowRight size={13} className="sm:w-4 sm:h-4" />
+                                            </span>
                                         </div>
-                                        <span className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-gold flex items-center justify-center text-navy transform -rotate-45 group-hover:rotate-0 transition-all duration-500 shadow-xl">
-                                            <ArrowRight size={16} className="sm:w-5 sm:h-5" />
-                                        </span>
                                     </div>
-                                </div>
-                            </Link>
-                        ))}
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
