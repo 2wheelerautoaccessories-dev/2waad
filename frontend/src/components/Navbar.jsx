@@ -32,8 +32,8 @@ const Navbar = () => {
     ];
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        const handleClickOutside = (e) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
                 setIsDropdownOpen(false);
             }
         };
@@ -44,65 +44,79 @@ const Navbar = () => {
     return (
         <nav className="bg-navy/95 backdrop-blur-md sticky top-0 z-50 border-b border-gold/20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16 md:h-20">
 
-                    {/* Logo & Brand — min-w-0 lets it shrink without pushing burger */}
-                    <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 flex-shrink-1 mr-2">
-                        <div className="relative w-9 h-9 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center">
+                {/* ── Main Bar ── */}
+                <div className="flex items-center h-16 md:h-20 gap-4">
+
+                    {/* ── Brand (Logo + Name) ── flex-1 so it fills left side */}
+                    <Link
+                        to="/"
+                        className="flex items-center gap-2.5 group flex-1 min-w-0"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        {/* Logo circle — fixed size, never squeezes */}
+                        <div className="flex-shrink-0 w-9 h-9 md:w-11 md:h-11 rounded-full bg-steel border border-gold/30 flex items-center justify-center overflow-hidden shadow-md group-hover:border-gold/60 transition-all duration-300">
                             <img
                                 src="/logo.png"
-                                alt="2waad Logo"
-                                className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_0_8px_rgba(192,192,192,0.3)] group-hover:drop-shadow-[0_0_12px_rgba(192,192,192,0.5)] transition-all duration-300"
+                                alt="2waad"
+                                className="w-full h-full object-contain scale-90"
                             />
                         </div>
-                        <div className="flex flex-col -space-y-0.5 min-w-0">
-                            <span className="font-heading text-lg md:text-2xl font-extrabold text-gold tracking-widest uppercase transition-all duration-300 group-hover:text-offwhite leading-none">
-                                2waad
+
+                        {/* Text block */}
+                        <div className="min-w-0 flex flex-col justify-center leading-none">
+                            <span className="font-heading font-extrabold text-gold tracking-widest uppercase transition-colors duration-300 group-hover:text-offwhite text-base md:text-xl leading-tight">
+                                2WAAD
                             </span>
-                            {/* Hidden on very small screens, abbreviated on sm, full on md+ */}
-                            <span className="hidden sm:block md:hidden text-[8px] text-slate font-medium tracking-[0.2em] uppercase opacity-70 truncate">
-                                Two Wheeler Accessories
-                            </span>
-                            <span className="hidden md:block text-[10px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
-                                Two Wheeler Auto Accessories Den
+                            {/* Tagline: hidden on xs, tiny on sm, full on md+ */}
+                            <span className="hidden sm:block text-[8px] md:text-[9px] text-slate font-medium tracking-[0.18em] uppercase opacity-70 truncate leading-tight mt-0.5">
+                                <span className="sm:hidden md:block">Two Wheeler Auto Accessories Den</span>
+                                <span className="hidden sm:block md:hidden">Two Wheeler Accessories</span>
                             </span>
                         </div>
                     </Link>
 
-                    {/* Desktop Nav */}
-                    <div className="hidden md:flex space-x-8 items-center">
-                        <Link to="/" className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest">Home</Link>
-                        <Link to="/shop" className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest">Shop</Link>
+                    {/* ── Desktop Nav Links ── flex-shrink-0 so they never wrap */}
+                    <div className="hidden md:flex items-center gap-7 flex-shrink-0">
+                        <Link to="/" className="text-slate hover:text-gold font-medium text-[11px] transition-colors uppercase tracking-[0.15em]">
+                            Home
+                        </Link>
+                        <Link to="/shop" className="text-slate hover:text-gold font-medium text-[11px] transition-colors uppercase tracking-[0.15em]">
+                            Shop
+                        </Link>
 
                         {/* Categories Dropdown */}
                         <div className="relative" ref={dropdownRef}>
                             <button
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                 onMouseEnter={() => setIsDropdownOpen(true)}
-                                className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest flex items-center gap-1.5 py-8"
+                                className="text-slate hover:text-gold font-medium text-[11px] transition-colors uppercase tracking-[0.15em] flex items-center gap-1 py-8"
                             >
-                                Categories <ChevronDown size={14} className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                Categories
+                                <ChevronDown size={13} className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                             </button>
 
                             <AnimatePresence>
                                 {isDropdownOpen && (
                                     <motion.div
-                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        initial={{ opacity: 0, y: 8, scale: 0.97 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                                        transition={{ duration: 0.15 }}
                                         onMouseLeave={() => setIsDropdownOpen(false)}
-                                        className="absolute top-full left-1/2 -translate-x-1/2 w-[480px] bg-charcoal border border-gold/20 rounded-2xl shadow-2xl p-6 grid grid-cols-2 gap-x-8 gap-y-2"
+                                        className="absolute top-full right-0 w-[540px] bg-charcoal border border-gold/20 rounded-2xl shadow-2xl p-5 grid grid-cols-3 gap-x-6 gap-y-1"
                                     >
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-4 h-4 bg-charcoal border-t border-l border-gold/20 rotate-45"></div>
+                                        {/* Caret */}
+                                        <div className="absolute -top-2 right-6 w-4 h-4 bg-charcoal border-t border-l border-gold/20 rotate-45" />
                                         {categories.map((cat) => (
                                             <Link
                                                 key={cat.name}
                                                 to={cat.path}
                                                 onClick={() => setIsDropdownOpen(false)}
-                                                className="text-slate hover:text-gold text-[13px] font-medium transition-colors py-2 flex items-center gap-2 group"
+                                                className="text-slate hover:text-gold text-[12px] font-medium transition-colors py-2 flex items-center gap-2 group/item"
                                             >
-                                                <span className="w-1 h-1 bg-gold rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                                {cat.name}
+                                                <span className="w-1 h-1 bg-gold rounded-full opacity-0 group-hover/item:opacity-100 transition-opacity flex-shrink-0" />
+                                                <span className="truncate">{cat.name}</span>
                                             </Link>
                                         ))}
                                     </motion.div>
@@ -110,56 +124,70 @@ const Navbar = () => {
                             </AnimatePresence>
                         </div>
 
-                        <Link to="/about" className="text-slate hover:text-gold font-medium text-xs transition-colors uppercase tracking-widest">About</Link>
+                        <Link to="/about" className="text-slate hover:text-gold font-medium text-[11px] transition-colors uppercase tracking-[0.15em]">
+                            About
+                        </Link>
                     </div>
 
-                    {/* Mobile menu button — flex-shrink-0 so it never gets squeezed */}
-                    <div className="md:hidden flex-shrink-0 flex items-center">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="text-slate hover:text-gold transition-colors p-1"
-                            aria-label="Toggle menu"
-                        >
-                            {isOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
+                    {/* ── Mobile Burger ── always flex-shrink-0 */}
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="md:hidden flex-shrink-0 text-slate hover:text-gold transition-colors p-1.5 rounded-lg hover:bg-gold/10"
+                        aria-label="Toggle menu"
+                    >
+                        <AnimatePresence mode="wait" initial={false}>
+                            {isOpen
+                                ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                    <X size={22} />
+                                </motion.span>
+                                : <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                                    <Menu size={22} />
+                                </motion.span>
+                            }
+                        </AnimatePresence>
+                    </button>
                 </div>
             </div>
 
-
-            {/* Mobile Menu */}
+            {/* ── Mobile Slide-Down Menu ── */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
                         className="md:hidden bg-steel border-t border-gold/20 overflow-hidden"
                     >
-                        <div className="px-6 py-8 space-y-6 flex flex-col">
+                        <div className="px-5 py-6 space-y-1">
+                            {/* Main Nav Links */}
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     to={link.path}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-offwhite text-lg font-heading font-bold uppercase tracking-widest flex items-center justify-between group"
+                                    className="flex items-center justify-between py-3 text-offwhite text-base font-heading font-bold uppercase tracking-widest border-b border-gold/10 hover:text-gold transition-colors"
                                 >
                                     {link.name}
-                                    <span className="w-8 h-[1px] bg-gold/30 group-hover:w-12 transition-all"></span>
+                                    <span className="text-gold/40 text-xs">›</span>
                                 </Link>
                             ))}
 
-                            <div className="pt-4 space-y-4">
-                                <p className="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-4">Categories</p>
-                                <div className="grid grid-cols-2 gap-4">
+                            {/* Categories */}
+                            <div className="pt-4 pb-2">
+                                <p className="text-gold text-[9px] font-bold uppercase tracking-[0.35em] mb-3 px-0.5">
+                                    Categories
+                                </p>
+                                <div className="grid grid-cols-2 gap-x-4 gap-y-0">
                                     {categories.map((cat) => (
                                         <Link
                                             key={cat.name}
                                             to={cat.path}
                                             onClick={() => setIsOpen(false)}
-                                            className="text-slate text-sm font-medium hover:text-gold transition-colors"
+                                            className="text-slate text-sm font-medium hover:text-gold transition-colors py-2.5 flex items-center gap-2 border-b border-gold/5"
                                         >
-                                            {cat.name}
+                                            <span className="w-1 h-1 bg-gold/40 rounded-full flex-shrink-0" />
+                                            <span className="truncate">{cat.name}</span>
                                         </Link>
                                     ))}
                                 </div>
