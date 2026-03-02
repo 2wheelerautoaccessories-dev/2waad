@@ -12,21 +12,13 @@ const Footer = () => {
 
                     {/* Brand */}
                     <div className="space-y-4">
-                        <Link to="/" className="flex items-center gap-4 mb-2 group">
-                            <div className="w-12 h-12 flex items-center justify-center">
+                        <Link to="/" className="flex items-center mb-2 group">
+                            <div className="h-12 w-44 flex items-center justify-start overflow-hidden">
                                 <img
                                     src="/logo.png"
-                                    alt="2waad"
-                                    className="w-full h-full object-contain brightness-110 drop-shadow-[0_0_5px_rgba(192,192,192,0.2)]"
+                                    alt="2WAAD"
+                                    className="h-full w-auto object-contain group-hover:brightness-125 transition-all duration-300"
                                 />
-                            </div>
-                            <div className="flex flex-col -space-y-1">
-                                <span className="font-heading text-xl font-extrabold text-gold tracking-widest uppercase">
-                                    2waad
-                                </span>
-                                <span className="text-[8px] text-slate font-medium tracking-[0.3em] uppercase opacity-70">
-                                    Two Wheeler Auto Accessories Den
-                                </span>
                             </div>
                         </Link>
                         <p className="text-slate text-sm leading-relaxed">

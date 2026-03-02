@@ -49,8 +49,8 @@ const Home = () => {
             <section className="relative h-[90vh] min-h-[550px] flex items-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="https://res.cloudinary.com/dm0xxbz3s/image/upload/f_auto,q_auto/v1772457687/2waad/x4j9jhztjzd0fjglo44r.jpg"
-                        alt="2waad Two Wheeler Accessories"
+                        src="/hero.png"
+                        alt="2waad Two Wheeler Accessories — Premium Bike Garage"
                         className="w-full h-full object-cover object-center scale-105 animate-slow-zoom"
                         loading="eager"
                     />
@@ -91,8 +91,8 @@ const Home = () => {
                         <div className="w-16 h-1 bg-gold mx-auto rounded-full"></div>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-5">
-                        {categories.map((cat) => {
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
+                        {categories.slice(0, 4).map((cat) => {
                             const catImages = {
                                 // Verified: full-face motorcycle helmet on display
                                 'Helmets': 'https://images.unsplash.com/photo-1618762044398-ec1e7e048bbd?q=80&w=800&auto=format&fit=crop',

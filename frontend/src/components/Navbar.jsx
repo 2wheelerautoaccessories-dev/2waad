@@ -51,28 +51,16 @@ const Navbar = () => {
                     {/* ── Brand (Logo + Name) ── flex-1 so it fills left side */}
                     <Link
                         to="/"
-                        className="flex items-center gap-2.5 group flex-1 min-w-0"
+                        className="flex items-center group flex-1 min-w-0"
                         onClick={() => setIsOpen(false)}
                     >
-                        {/* Logo circle — fixed size, never squeezes */}
-                        <div className="flex-shrink-0 w-9 h-9 md:w-11 md:h-11 rounded-full bg-steel border border-gold/30 flex items-center justify-center overflow-hidden shadow-md group-hover:border-gold/60 transition-all duration-300">
+                        {/* Logo — wide rectangular, shows 2WAAD text inside */}
+                        <div className="flex-shrink-0 h-10 md:h-12 w-36 md:w-44 flex items-center justify-start overflow-hidden">
                             <img
                                 src="/logo.png"
-                                alt="2waad"
-                                className="w-full h-full object-contain scale-90"
+                                alt="2WAAD Logo"
+                                className="h-full w-auto object-contain group-hover:brightness-125 transition-all duration-300"
                             />
-                        </div>
-
-                        {/* Text block */}
-                        <div className="min-w-0 flex flex-col justify-center leading-none">
-                            <span className="font-heading font-extrabold text-gold tracking-widest uppercase transition-colors duration-300 group-hover:text-offwhite text-base md:text-xl leading-tight">
-                                2WAAD
-                            </span>
-                            {/* Tagline: hidden on xs, tiny on sm, full on md+ */}
-                            <span className="hidden sm:block text-[8px] md:text-[9px] text-slate font-medium tracking-[0.18em] uppercase opacity-70 truncate leading-tight mt-0.5">
-                                <span className="sm:hidden md:block">Two Wheeler Auto Accessories Den</span>
-                                <span className="hidden sm:block md:hidden">Two Wheeler Accessories</span>
-                            </span>
                         </div>
                     </Link>
 

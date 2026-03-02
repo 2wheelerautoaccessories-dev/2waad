@@ -28,11 +28,14 @@ const Login = () => {
             <div className="w-full max-w-md">
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <div className="w-20 h-20 flex items-center justify-center mx-auto mb-4">
-                        <img src="/logo.png" alt="2waad" className="w-full h-full object-contain brightness-110 drop-shadow-[0_0_10px_rgba(192,192,192,0.3)]" />
+                    <div className="h-20 w-56 mx-auto flex items-center justify-center mb-3">
+                        <img
+                            src="/logo.png"
+                            alt="2WAAD"
+                            className="h-full w-auto object-contain drop-shadow-[0_0_12px_rgba(192,192,192,0.4)]"
+                        />
                     </div>
-                    <h1 className="font-heading text-4xl font-extrabold text-gold uppercase tracking-[0.2em]">2waad</h1>
-                    <p className="text-slate text-xs mt-2 uppercase tracking-[0.4em] opacity-70 font-medium">Auto Accessories Den</p>
+                    <p className="text-slate text-xs uppercase tracking-[0.4em] opacity-70 font-medium">Admin Portal</p>
                 </div>
 
                 <div className="bg-steel rounded-2xl p-8 border border-gold/20 shadow-2xl">
